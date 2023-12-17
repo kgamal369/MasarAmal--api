@@ -10,7 +10,9 @@ gem "sprockets-rails"
 
 
 gem "swagger-docs"
+
 gem "activeadmin"
+
 gem 'swagger-ui_rails', '~> 0.1.7'
 
 # Use postgresql as the database for Active Record
