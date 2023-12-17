@@ -1,0 +1,2 @@
+class MentalService < ApplicationRecord
+end

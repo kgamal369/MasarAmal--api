@@ -1,0 +1,2 @@
+module MentalServicesHelper
+end

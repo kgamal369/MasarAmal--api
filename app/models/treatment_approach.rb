@@ -1,0 +1,2 @@
+class TreatmentApproach < ApplicationRecord
+end

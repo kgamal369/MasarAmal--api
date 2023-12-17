@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Mental services</h1>
+
+<div id="mental_services">
+  <% @mental_services.each do |mental_service| %>
+    <%= render mental_service %>
+    <p>
+      <%= link_to "Show this mental service", mental_service %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New mental service", new_mental_service_path %>

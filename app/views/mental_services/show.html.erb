@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @mental_service %>
+
+<div>
+  <%= link_to "Edit this mental service", edit_mental_service_path(@mental_service) %> |
+  <%= link_to "Back to mental services", mental_services_path %>
+
+  <%= button_to "Destroy this mental service", @mental_service, method: :delete %>
+</div>
