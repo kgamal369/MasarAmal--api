@@ -13,6 +13,8 @@ gem 'swagger-ui_rails', '~> 0.1.7'
 
 gem 'activeadmin', '~> 3.2'
 gem 'rswag', '~> 2.0'
+gem 'rswag-api'
+gem 'rswag-ui'
 gem 'devise','>= 4.9.3'
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
