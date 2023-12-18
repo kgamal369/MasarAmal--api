@@ -9,12 +9,14 @@ gem "rails", "~> 7.1.2"
 gem "sprockets-rails"
 
 gem "swagger-docs"
+gem 'swagger-ui_rails', '~> 0.1.7'
 
 gem 'activeadmin', '~> 3.2'
 gem 'rswag', '~> 2.0'
-
+gem 'devise','>= 4.9.3'
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
+gem 'sassc', '~> 2.0'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
