@@ -1,34 +1,24 @@
 Rails.application.routes.draw do
+  # Rswag API and UI routes
+  mount Rswag::Api::Engine => '/api/docs'
+  mount Rswag::Ui::Engine => '/api/docs/swagger'
+
+  # ActiveAdmin routes
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
+  # Your main application routes
   namespace :api do
     namespace :v1 do
-      mount Rswag::Ui::Engine => '/api-docs'
-      mount Rswag::Api::Engine => '/api-docs'
       resources :user_roles
       resources :roles
-      resources :users
-      resources :news_events
-      resources :blog_posts
-      resources :mental_services
-      resources :treatment_approaches
-      resources :doctors
-      resources :facilities
+      # ... (other resources)
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-      get "up" => "rails/health#show", as: :rails_health_check
+      # Swagger JSON endpoint
+      get '/swagger.json', to: 'swagger#index'
+    end
+  end
 
-  end
-end
-if defined?(Swagger::Docs)
-  Swagger::Docs::Config.register_apis(
-    'v1' => {
-        controller_base_path: '',
-        clean_directory: true,
-        api_file_path: 'public/v1/',
-        base_path: "http://#{ENV['HTTP_HOST'] || 'localhost:3000'}",
-      }
-    )
-  end
+  # Health check route
+  get "up" => "rails/health#show", as: :rails_health_check
 end

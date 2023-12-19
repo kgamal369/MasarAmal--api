@@ -12,9 +12,10 @@ gem "swagger-docs"
 gem 'swagger-ui_rails', '~> 0.1.7'
 
 gem 'activeadmin', '~> 3.2'
-gem 'rswag', '~> 2.0'
-gem 'rswag-api'
-gem 'rswag-ui'
+gem 'rswag', '~> 2.13'
+gem 'rswag-api', '~> 2.13'
+gem 'rswag-ui', '~> 2.13'
+
 gem 'devise','>= 4.9.3'
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
@@ -55,6 +56,8 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'rspec-rails'
+  gem 'rswag-specs'
   gem "debug", platforms: %i[ mri windows ]
 end
 
