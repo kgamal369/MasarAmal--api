@@ -15,7 +15,7 @@ gem 'activeadmin', '~> 3.2'
 gem 'rswag', '~> 2.13'
 gem 'rswag-api', '~> 2.13'
 gem 'rswag-ui', '~> 2.13'
-
+gem 'annotate', '~> 3.2'
 gem 'devise','>= 4.9.3'
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
