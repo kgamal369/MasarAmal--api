@@ -14,6 +14,9 @@ ActiveAdmin.register_page "Dashboard" do
               li "Total Mental Services: #{MentalService.count}"
               li "Total Blog Posts: #{BlogPost.count}"
               li "Total News Events: #{NewsEvent.count}"
+              li "Total Roles: #{Role.count}"
+              li "Total Users: #{User.count}"
+              li "Total Users_Rols: #{UserRole.count}"
             end
           end
         end
@@ -27,11 +30,26 @@ ActiveAdmin.register_page "Dashboard" do
               li link_to("Mental Services", admin_mental_services_path)
               li link_to("Blog Posts", admin_blog_posts_path)
               li link_to("News Events", admin_news_events_path)
+              li link_to("Roles",admin_roles_path)
+              li link_to("Users",admin_users_path)
+              li link_to("Users_Roles",admin_user_roles_path)
             end
           end
         end
       end
+      columns do
+        column do
+          panel "Facilities Distribution" do
+            pie_chart Facility.group(:name).count
+          end
+        end
 
+        column do
+          panel "Doctors Distribution" do
+            bar_chart Doctor.group(:name).count
+          end
+        end
+      end
       span class: "blank_slate" do
         span I18n.t("active_admin.dashboard_welcome.welcome")
         small I18n.t("active_admin.dashboard_welcome.call_to_action")

@@ -10,7 +10,7 @@ gem "sprockets-rails"
 
 gem "swagger-docs"
 gem 'swagger-ui_rails', '~> 0.1.7'
-
+gem 'chartkick', '~> 5.0'
 gem 'activeadmin', '~> 3.2'
 gem 'rswag', '~> 2.13'
 gem 'rswag-api', '~> 2.13'

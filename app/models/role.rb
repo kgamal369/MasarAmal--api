@@ -6,4 +6,7 @@
 #  role_name :string           not null
 #
 class Role < ApplicationRecord
+    def self.ransackable_attributes(auth_object = nil)
+        super & %w[role_id role_name]
+    end    
 end
