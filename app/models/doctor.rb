@@ -8,5 +8,10 @@
 #  pictures      :string
 #  last_modified :datetime
 #
+# app/models/doctor.rb
 class Doctor < ApplicationRecord
-end
+    def self.ransackable_attributes(auth_object = nil)
+      super & %w[name text pictures last_modified]
+    end
+  end
+  
