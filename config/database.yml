@@ -12,18 +12,34 @@
 # Configure Using Gemfile
 # gem "pg"
 #
+# local: &local
+#   adapter: postgresql
+#   encoding: unicode
+#   database: postgres
+#   pool: 5
+#   username: postgres
+#   password: 'THEspider369'
+#   host: localhost
+#   port: 5432
+#   schema_search_path: masar
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+
+
 default: &default
   adapter: postgresql
   encoding: unicode
-  database: postgres
+  database: defaultdb
   pool: 5
-  username: postgres
-  password: 'THEspider369'
-  host: localhost
-  port: 5432
+  username: doadmin
+  password: 'AVNS__YIkUW0GwpHAKUeVdMO'
+  host: db-postgresql-nyc3-35388-do-user-15379900-0.c.db.ondigitalocean.com
+  port: 25060
   schema_search_path: masar
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
+
+
 
 development:
   <<: *default

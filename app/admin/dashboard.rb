@@ -16,7 +16,8 @@ ActiveAdmin.register_page "Dashboard" do
               li "Total News Events: #{NewsEvent.count}"
               li "Total Roles: #{Role.count}"
               li "Total Users: #{User.count}"
-              li "Total Users_Rols: #{UserRole.count}"
+              li "Total Users_Roles: #{UserRole.count}"
+              li "Total CMSes: #{Cms.count}"
             end
           end
         end
@@ -33,6 +34,7 @@ ActiveAdmin.register_page "Dashboard" do
               li link_to("Roles",admin_roles_path)
               li link_to("Users",admin_users_path)
               li link_to("Users_Roles",admin_user_roles_path)
+              li link_to("CMS",admin_cms_path)
             end
           end
         end
@@ -45,8 +47,21 @@ ActiveAdmin.register_page "Dashboard" do
         end
 
         column do
-          panel "Doctors Distribution" do
-            bar_chart Doctor.group(:name).count
+          panel "Amount" do
+            data = {
+              "Total Doctors" => Doctor.count,
+              "Total Facilities" => Facility.count,
+              "Total Treatment Approaches" => TreatmentApproach.count,
+              "Total Mental Services" => MentalService.count,
+              "Total Blog Posts" => BlogPost.count,
+              "Total News Events"=> NewsEvent.count,
+              "Total Roles"=> Role.count ,
+              "Total Users"=> User.count ,
+              "Total Users_Rols"=> UserRole.count ,
+              "Total CMS"=>Cms.count
+            }
+        
+            bar_chart data
           end
         end
       end

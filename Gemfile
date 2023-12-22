@@ -8,13 +8,14 @@ gem "rails", "~> 7.1.2"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
-gem "swagger-docs"
-gem 'swagger-ui_rails', '~> 0.1.7'
 gem 'chartkick', '~> 5.0'
 gem 'activeadmin', '~> 3.2'
 gem 'rswag', '~> 2.13'
 gem 'rswag-api', '~> 2.13'
 gem 'rswag-ui', '~> 2.13'
+gem 'swagger-ui_rails', '~> 0.1.7'
+gem 'swagger-blocks', '~> 3.0'
+gem 'swagger-docs', '>= 0.1.0', '< 1.0'
 gem 'annotate', '~> 3.2'
 gem 'devise','>= 4.9.3'
 # Use postgresql as the database for Active Record

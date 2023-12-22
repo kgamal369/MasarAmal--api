@@ -10,17 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_18_025918) do
-  create_schema "German Course"
-  create_schema "MDM_ProtoType"
-  create_schema "MES"
+ActiveRecord::Schema[7.1].define(version: 2023_12_22_034225) do
   create_schema "masar"
-  create_schema "mdm"
-  create_schema "pgagent"
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "adminpack"
-  enable_extension "pgagent"
   enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -55,6 +48,20 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_18_025918) do
     t.datetime "last_modified", precision: nil
   end
 
+  create_table "cms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cmses", primary_key: ["pagename", "language", "location", "type"], force: :cascade do |t|
+    t.text "pagename", null: false
+    t.text "language", null: false
+    t.text "location", null: false
+    t.text "type", null: false
+    t.text "value", null: false
+    t.datetime "last_modified_date", precision: nil
+  end
+
   create_table "doctors", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.text "text"
@@ -69,18 +76,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_18_025918) do
     t.datetime "last_modified", precision: nil
   end
 
-  create_table "mental_service", id: :serial, force: :cascade do |t|
+  create_table "mental_services", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.text "text"
     t.datetime "last_modified", precision: nil
-  end
-
-  create_table "message", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
-    t.string "email"
-    t.string "phone"
-    t.text "message"
-    t.datetime "datetime", precision: nil
   end
 
   create_table "news_events", id: :serial, force: :cascade do |t|
@@ -96,7 +95,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_18_025918) do
     t.unique_constraint ["role_name"], name: "roles_role_name_key"
   end
 
-  create_table "treatment_approach", id: :serial, force: :cascade do |t|
+  create_table "treatment_approaches", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.text "text"
     t.datetime "last_modified", precision: nil
