@@ -3,19 +3,19 @@ require 'rails_helper'
 RSpec.describe "cmses/index", type: :view do
   before(:each) do
     assign(:cmses, [
-      Cmse.create!(
-        PageName: "MyText",
-        Language: "MyText",
-        Location: "MyText",
-        Type: "MyText",
-        Value: "MyText"
+      cms.create!(
+        pageName: "MyText",
+        language: "MyText",
+        location: "MyText",
+        type: "MyText",
+        value: "MyText"
       ),
-      Cmse.create!(
-        PageName: "MyText",
-        Language: "MyText",
-        Location: "MyText",
-        Type: "MyText",
-        Value: "MyText"
+      cms.create!(
+        pageName: "MyText",
+        language: "MyText",
+        location: "MyText",
+        type: "MyText",
+        value: "MyText"
       )
     ])
   end

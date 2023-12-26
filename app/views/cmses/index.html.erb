@@ -3,12 +3,12 @@
 <h1>Cmses</h1>
 
 <div id="cmses">
-  <% @cmses.each do |cmse| %>
-    <%= render cmse %>
+  <% @cmses.each do |cms| %>
+    <%= render partial: 'cmses/cms', locals: { cms: cms } %>
     <p>
-      <%= link_to "Show this cmse", cmse %>
+      <%= link_to "Show this cms", cmse_path(cms) %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New cmse", new_cmse_path %>
+<%= link_to "New cms", new_cmse_path %>

@@ -10,14 +10,11 @@ gem "sprockets-rails"
 
 gem 'chartkick', '~> 5.0'
 gem 'activeadmin', '~> 3.2'
-gem 'rswag', '~> 2.13'
-gem 'rswag-api', '~> 2.13'
-gem 'rswag-ui', '~> 2.13'
-gem 'swagger-ui_rails', '~> 0.1.7'
-gem 'swagger-blocks', '~> 3.0'
-gem 'swagger-docs', '>= 0.1.0', '< 1.0'
 gem 'annotate', '~> 3.2'
 gem 'devise','>= 4.9.3'
+gem 'rswag', '~> 2.13'
+gem 'auto-rswag', '~> 0.1.1'
+
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 gem 'sassc', '~> 2.0'
@@ -58,7 +55,6 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'rspec-rails'
-  gem 'rswag-specs'
   gem "debug", platforms: %i[ mri ]
 end
 

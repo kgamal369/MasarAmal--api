@@ -15,17 +15,7 @@ module MasarAmalApi
     # Use the Zeitwerk autoloader
     config.autoloader = :classic
     config.credentials = Rails.application.credentials
-    config.swagger_docs = {
-      'v1/swagger.json' => {
-        openapi: '3.0.1',
-        info: {
-          title: 'Your API Documentation',
-          version: 'v1',
-        },
-      },
-    }
-
-
+   
     # Ensure that the Devise initializer is loaded
     config.to_prepare do
       Devise::SessionsController.layout "active_admin"

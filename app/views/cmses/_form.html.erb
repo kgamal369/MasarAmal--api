@@ -1,10 +1,10 @@
-<%= form_with(model: cmse) do |form| %>
-  <% if cmse.errors.any? %>
+<%= form_with(model: cms) do |form| %>
+  <% if cms.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(cmse.errors.count, "error") %> prohibited this cmse from being saved:</h2>
+      <h2><%= pluralize(cms.errors.count, "error") %> prohibited this cms from being saved:</h2>
 
       <ul>
-        <% cmse.errors.each do |error| %>
+        <% cms.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -12,33 +12,33 @@
   <% end %>
 
   <div>
-    <%= form.label :PageName, style: "display: block" %>
-    <%= form.text_area :PageName %>
+    <%= form.label :pageName, style: "display: block" %>
+    <%= form.text_area :pageName %>
   </div>
 
   <div>
-    <%= form.label :Language, style: "display: block" %>
-    <%= form.text_area :Language %>
+    <%= form.label :language, style: "display: block" %>
+    <%= form.text_area :language %>
   </div>
 
   <div>
-    <%= form.label :Location, style: "display: block" %>
-    <%= form.text_area :Location %>
+    <%= form.label :location, style: "display: block" %>
+    <%= form.text_area :location %>
   </div>
 
   <div>
-    <%= form.label :Type, style: "display: block" %>
-    <%= form.text_area :Type %>
+    <%= form.label :type, style: "display: block" %>
+    <%= form.text_area :type %>
   </div>
 
   <div>
-    <%= form.label :Value, style: "display: block" %>
-    <%= form.text_area :Value %>
+    <%= form.label :value, style: "display: block" %>
+    <%= form.text_area :value %>
   </div>
 
   <div>
-    <%= form.label :Last_modified_date, style: "display: block" %>
-    <%= form.datetime_field :Last_modified_date %>
+    <%= form.label :last_modified_date, style: "display: block" %>
+    <%= form.datetime_field :last_modified_date %>
   </div>
 
   <div>

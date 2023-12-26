@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "cmses/show", type: :view do
   before(:each) do
-    assign(:cmse, Cmse.create!(
-      PageName: "MyText",
-      Language: "MyText",
-      Location: "MyText",
-      Type: "MyText",
-      Value: "MyText"
+    assign(:cms, cms.create!(
+      pageName: "MyText",
+      language: "MyText",
+      location: "MyText",
+      type: "MyText",
+      value: "MyText"
     ))
   end
 

@@ -15,7 +15,7 @@ require 'rails_helper'
 RSpec.describe "/cmses", type: :request do
   
   # This should return the minimal set of attributes required to create a valid
-  # Cmse. As you add validations to Cmse, be sure to
+  # cms. As you add validations to Cmse, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -27,7 +27,7 @@ RSpec.describe "/cmses", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      Cmse.create! valid_attributes
+      cms.create! valid_attributes
       get cmses_url
       expect(response).to be_successful
     end
@@ -35,51 +35,51 @@ RSpec.describe "/cmses", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      cmse = Cmse.create! valid_attributes
-      get cmse_url(cmse)
+      cms = cms.create! valid_attributes
+      get cms_url(cms)
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_cmse_url
+      get new_cms_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
     it "renders a successful response" do
-      cmse = Cmse.create! valid_attributes
-      get edit_cmse_url(cmse)
+      cms = cms.create! valid_attributes
+      get edit_cms_url(cms)
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
-      it "creates a new Cmse" do
+      it "creates a new Cms" do
         expect {
-          post cmses_url, params: { cmse: valid_attributes }
-        }.to change(Cmse, :count).by(1)
+          post cmses_url, params: { cms: valid_attributes }
+        }.to change(Cms, :count).by(1)
       end
 
-      it "redirects to the created cmse" do
-        post cmses_url, params: { cmse: valid_attributes }
-        expect(response).to redirect_to(cmse_url(Cmse.last))
+      it "redirects to the created cms" do
+        post cmses_url, params: { cms: valid_attributes }
+        expect(response).to redirect_to(cms_url(cms.last))
       end
     end
 
     context "with invalid parameters" do
-      it "does not create a new Cmse" do
+      it "does not create a new Cms" do
         expect {
-          post cmses_url, params: { cmse: invalid_attributes }
-        }.to change(Cmse, :count).by(0)
+          post cmses_url, params: { cms: invalid_attributes }
+        }.to change(Cms, :count).by(0)
       end
 
     
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post cmses_url, params: { cmse: invalid_attributes }
+        post cmses_url, params: { cms: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     
@@ -92,26 +92,26 @@ RSpec.describe "/cmses", type: :request do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested cmse" do
-        cmse = Cmse.create! valid_attributes
-        patch cmse_url(cmse), params: { cmse: new_attributes }
-        cmse.reload
+      it "updates the requested cms" do
+        cms = cms.create! valid_attributes
+        patch cms_url(cms), params: { cms: new_attributes }
+        cms.reload
         skip("Add assertions for updated state")
       end
 
-      it "redirects to the cmse" do
-        cmse = Cmse.create! valid_attributes
-        patch cmse_url(cmse), params: { cmse: new_attributes }
-        cmse.reload
-        expect(response).to redirect_to(cmse_url(cmse))
+      it "redirects to the cms" do
+        cms = cms.create! valid_attributes
+        patch cms_url(cms), params: { cms: new_attributes }
+        cms.reload
+        expect(response).to redirect_to(cms_url(cms))
       end
     end
 
     context "with invalid parameters" do
     
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        cmse = Cmse.create! valid_attributes
-        patch cmse_url(cmse), params: { cmse: invalid_attributes }
+        cms = cms.create! valid_attributes
+        patch cms_url(cms), params: { cms: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     
@@ -119,16 +119,16 @@ RSpec.describe "/cmses", type: :request do
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested cmse" do
-      cmse = Cmse.create! valid_attributes
+    it "destroys the requested cms" do
+      cms = cms.create! valid_attributes
       expect {
-        delete cmse_url(cmse)
-      }.to change(Cmse, :count).by(-1)
+        delete cms_url(cms)
+      }.to change(Cms, :count).by(-1)
     end
 
     it "redirects to the cmses list" do
-      cmse = Cmse.create! valid_attributes
-      delete cmse_url(cmse)
+      cms = cms.create! valid_attributes
+      delete cms_url(cms)
       expect(response).to redirect_to(cmses_url)
     end
   end
