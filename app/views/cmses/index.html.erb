@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Cmses</h1>
+
+<div id="cmses">
+  <% @cmses.each do |cmse| %>
+    <%= render cmse %>
+    <p>
+      <%= link_to "Show this cmse", cmse %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New cmse", new_cmse_path %>

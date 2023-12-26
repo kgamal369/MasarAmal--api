@@ -1,0 +1,47 @@
+<%= form_with(model: cmse) do |form| %>
+  <% if cmse.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(cmse.errors.count, "error") %> prohibited this cmse from being saved:</h2>
+
+      <ul>
+        <% cmse.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :PageName, style: "display: block" %>
+    <%= form.text_area :PageName %>
+  </div>
+
+  <div>
+    <%= form.label :Language, style: "display: block" %>
+    <%= form.text_area :Language %>
+  </div>
+
+  <div>
+    <%= form.label :Location, style: "display: block" %>
+    <%= form.text_area :Location %>
+  </div>
+
+  <div>
+    <%= form.label :Type, style: "display: block" %>
+    <%= form.text_area :Type %>
+  </div>
+
+  <div>
+    <%= form.label :Value, style: "display: block" %>
+    <%= form.text_area :Value %>
+  </div>
+
+  <div>
+    <%= form.label :Last_modified_date, style: "display: block" %>
+    <%= form.datetime_field :Last_modified_date %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

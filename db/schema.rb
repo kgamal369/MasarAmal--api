@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_22_034225) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_26_034325) do
   create_schema "masar"
 
   # These are extensions that must be enabled in order to support this database
@@ -46,11 +46,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_22_034225) do
     t.string "header", null: false
     t.text "text"
     t.datetime "last_modified", precision: nil
-  end
-
-  create_table "cms", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "cmses", primary_key: ["pagename", "language", "location", "type"], force: :cascade do |t|

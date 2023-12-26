@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @cmse %>
+
+<div>
+  <%= link_to "Edit this cmse", edit_cmse_path(@cmse) %> |
+  <%= link_to "Back to cmses", cmses_path %>
+
+  <%= button_to "Destroy this cmse", @cmse, method: :delete %>
+</div>

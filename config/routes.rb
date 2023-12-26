@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :cmses
+  resources :cms
+
   # Rswag API and UI routes
   mount Rswag::Api::Engine => '/api/docs'
   mount Rswag::Ui::Engine => '/api/docs/swagger'
