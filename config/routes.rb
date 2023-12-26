@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  resources :cmses
-  resources :cms
-
   # Rswag API and UI routes
   mount Rswag::Api::Engine => '/api/docs'
   mount Rswag::Ui::Engine => '/api/docs/swagger'
@@ -24,4 +21,6 @@ Rails.application.routes.draw do
 
   # Health check route
   get "up" => "rails/health#show", as: :rails_health_check
+  # Set ActiveAdmin dashboard as the root
+  root to: 'admin/dashboard#index'
 end
