@@ -74,3 +74,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+platforms :mingw do
+  # Windows-specific gems go here
+  gem 'tzinfo-data'
+end
