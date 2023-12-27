@@ -17,7 +17,13 @@ ActiveAdmin.register_page "Dashboard" do
               li "Total Roles: #{Role.count}"
               li "Total Users: #{User.count}"
               li "Total Users_Roles: #{UserRole.count}"
-              li "Total CMSes: #{Cms.count}"
+              li "CMS Pages: #{CmsPage.count}"
+              li "CMS Sections: #{CmsSection.count}"
+              li "CMS Components: #{CmsComponent.count}"
+              li "CMS Languages: #{CmsLanguage.count}"
+              li "CMS Page Sections: #{CmsPageSection.count}"
+              li "CMS Section Components: #{CmsSectionComponent.count}"
+              li "CMS Values: #{CmsValue.count}"
             end
           end
         end
@@ -34,7 +40,14 @@ ActiveAdmin.register_page "Dashboard" do
               li link_to("Roles",admin_roles_path)
               li link_to("Users",admin_users_path)
               li link_to("Users_Roles",admin_user_roles_path)
-              li link_to("CMS",admin_cms_path)
+              li link_to("CMS Pages", admin_cms_pages_path)
+              li link_to("CMS Sections", admin_cms_sections_path)
+              li link_to("CMS Components", admin_cms_components_path)
+              li link_to("CMS Languages", admin_cms_languages_path)
+              li link_to("CMS Page Sections", admin_cms_page_sections_path)
+              li link_to("CMS Section Components", admin_cms_section_components_path)
+              li link_to("CMS Values", admin_cms_values_path)
+            
             end
           end
         end
@@ -58,7 +71,6 @@ ActiveAdmin.register_page "Dashboard" do
               "Total Roles"=> Role.count ,
               "Total Users"=> User.count ,
               "Total Users_Rols"=> UserRole.count ,
-              "Total CMS"=>Cms.count
             }
         
             bar_chart data

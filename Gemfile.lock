@@ -355,6 +355,7 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.1.2)
+  ransack (~> 4.1)
   rspec-rails
   rswag (~> 2.13)
   sassc (~> 2.0)

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @cms_value %>
+
+<div>
+  <%= link_to "Edit this cms value", edit_cms_value_path(@cms_value) %> |
+  <%= link_to "Back to cms values", cms_values_path %>
+
+  <%= button_to "Destroy this cms value", @cms_value, method: :delete %>
+</div>

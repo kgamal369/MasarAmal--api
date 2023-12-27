@@ -1,0 +1,22 @@
+<%= form_with(model: section_component) do |form| %>
+  <% if section_component.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(section_component.errors.count, "error") %> prohibited this section_component from being saved:</h2>
+
+      <ul>
+        <% section_component.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :CMSValue, style: "display: block" %>
+    <%= form.text_field :CMSValue %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

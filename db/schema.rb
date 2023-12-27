@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_26_034325) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_27_022315) do
   create_schema "masar"
 
   # These are extensions that must be enabled in order to support this database
@@ -48,6 +48,44 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_034325) do
     t.datetime "last_modified", precision: nil
   end
 
+  create_table "cms_components", primary_key: "componentid", id: :serial, force: :cascade do |t|
+    t.string "componentname", limit: 255, null: false
+    t.string "componenttype", limit: 255, null: false
+  end
+
+  create_table "cms_languages", primary_key: "languageid", id: :serial, force: :cascade do |t|
+    t.string "languagename", limit: 255, null: false
+  end
+
+  create_table "cms_page_sections", primary_key: "pagesectionid", id: :serial, force: :cascade do |t|
+    t.integer "pageid"
+    t.integer "sectionid"
+
+    t.unique_constraint ["pageid", "sectionid"], name: "cms_page_sections_pageid_sectionid_key"
+  end
+
+  create_table "cms_pages", primary_key: "pageid", id: :serial, force: :cascade do |t|
+    t.string "pagename", limit: 255, null: false
+  end
+
+  create_table "cms_section_components", primary_key: "sectioncomponentid", id: :serial, force: :cascade do |t|
+    t.integer "sectionid"
+    t.integer "componentid"
+
+    t.unique_constraint ["sectionid", "componentid"], name: "cms_section_components_sectionid_componentid_key"
+  end
+
+  create_table "cms_sections", primary_key: "sectionid", id: :serial, force: :cascade do |t|
+    t.string "sectionname", limit: 255, null: false
+  end
+
+  create_table "cms_values", primary_key: "cmsvalueid", id: :serial, force: :cascade do |t|
+    t.integer "pagesectionid"
+    t.integer "sectioncomponentid"
+    t.integer "languageid"
+    t.text "value", null: false
+  end
+
   create_table "cmses", primary_key: ["pagename", "language", "location", "type"], force: :cascade do |t|
     t.text "pagename", null: false
     t.text "language", null: false
@@ -55,6 +93,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_034325) do
     t.text "type", null: false
     t.text "value", null: false
     t.datetime "last_modified_date", precision: nil
+  end
+
+  create_table "components", force: :cascade do |t|
+    t.string "name"
+    t.string "component_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "doctors", id: :serial, force: :cascade do |t|
@@ -71,6 +116,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_034325) do
     t.datetime "last_modified", precision: nil
   end
 
+  create_table "languages", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "mental_services", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.text "text"
@@ -84,10 +135,40 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_034325) do
     t.datetime "last_modified", precision: nil
   end
 
+  create_table "page_sections", force: :cascade do |t|
+    t.bigint "page_id", null: false
+    t.bigint "section_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["page_id"], name: "index_page_sections_on_page_id"
+    t.index ["section_id"], name: "index_page_sections_on_section_id"
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "roles", primary_key: "role_id", id: :serial, force: :cascade do |t|
     t.string "role_name", null: false
 
     t.unique_constraint ["role_name"], name: "roles_role_name_key"
+  end
+
+  create_table "section_components", force: :cascade do |t|
+    t.bigint "section_id", null: false
+    t.bigint "component_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["component_id"], name: "index_section_components_on_component_id"
+    t.index ["section_id"], name: "index_section_components_on_section_id"
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "treatment_approaches", id: :serial, force: :cascade do |t|
@@ -113,6 +194,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_034325) do
     t.unique_constraint ["username"], name: "users_username_key"
   end
 
+  add_foreign_key "cms_page_sections", "cms_pages", column: "pageid", primary_key: "pageid", name: "cms_page_sections_pageid_fkey", on_delete: :cascade
+  add_foreign_key "cms_page_sections", "cms_sections", column: "sectionid", primary_key: "sectionid", name: "cms_page_sections_sectionid_fkey", on_delete: :cascade
+  add_foreign_key "cms_section_components", "cms_components", column: "componentid", primary_key: "componentid", name: "cms_section_components_componentid_fkey", on_delete: :cascade
+  add_foreign_key "cms_section_components", "cms_sections", column: "sectionid", primary_key: "sectionid", name: "cms_section_components_sectionid_fkey", on_delete: :cascade
+  add_foreign_key "cms_values", "cms_languages", column: "languageid", primary_key: "languageid", name: "cms_values_languageid_fkey", on_delete: :cascade
+  add_foreign_key "cms_values", "cms_page_sections", column: "pagesectionid", primary_key: "pagesectionid", name: "cms_values_pagesectionid_fkey", on_delete: :cascade
+  add_foreign_key "cms_values", "cms_section_components", column: "sectioncomponentid", primary_key: "sectioncomponentid", name: "cms_values_sectioncomponentid_fkey", on_delete: :cascade
+  add_foreign_key "page_sections", "pages"
+  add_foreign_key "page_sections", "sections"
+  add_foreign_key "section_components", "components"
+  add_foreign_key "section_components", "sections"
   add_foreign_key "user_roles", "roles", primary_key: "role_id", name: "user_roles_role_id_fkey"
   add_foreign_key "user_roles", "users", primary_key: "user_id", name: "user_roles_user_id_fkey"
 end

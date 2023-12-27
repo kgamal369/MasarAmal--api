@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Cms values</h1>
+
+<div id="cms_values">
+  <% @cms_values.each do |cms_value| %>
+    <%= render cms_value %>
+    <p>
+      <%= link_to "Show this cms value", cms_value %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New cms value", new_cms_value_path %>

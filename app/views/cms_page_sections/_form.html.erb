@@ -1,0 +1,27 @@
+<%= form_with(model: page_section) do |form| %>
+  <% if page_section.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(page_section.errors.count, "error") %> prohibited this page_section from being saved:</h2>
+
+      <ul>
+        <% page_section.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :SectionComponent, style: "display: block" %>
+    <%= form.text_field :SectionComponent %>
+  </div>
+
+  <div>
+    <%= form.label :CMSValue, style: "display: block" %>
+    <%= form.text_field :CMSValue %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @page_section %>
+
+<div>
+  <%= link_to "Edit this page section", edit_page_section_path(@page_section) %> |
+  <%= link_to "Back to page sections", page_sections_path %>
+
+  <%= button_to "Destroy this page section", @page_section, method: :delete %>
+</div>

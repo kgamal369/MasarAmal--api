@@ -1,0 +1,32 @@
+<%= form_with(model: language) do |form| %>
+  <% if language.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(language.errors.count, "error") %> prohibited this language from being saved:</h2>
+
+      <ul>
+        <% language.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :PageSection, style: "display: block" %>
+    <%= form.text_field :PageSection %>
+  </div>
+
+  <div>
+    <%= form.label :SectionComponent, style: "display: block" %>
+    <%= form.text_field :SectionComponent %>
+  </div>
+
+  <div>
+    <%= form.label :CMSValue, style: "display: block" %>
+    <%= form.text_field :CMSValue %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

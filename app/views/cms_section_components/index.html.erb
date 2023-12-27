@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Section components</h1>
+
+<div id="section_components">
+  <% @section_components.each do |section_component| %>
+    <%= render section_component %>
+    <p>
+      <%= link_to "Show this section component", section_component %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New section component", new_section_component_path %>

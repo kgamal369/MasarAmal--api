@@ -14,7 +14,7 @@ gem 'annotate', '~> 3.2'
 gem 'devise','>= 4.9.3'
 gem 'rswag', '~> 2.13'
 gem 'auto-rswag', '~> 0.1.1'
-
+gem 'ransack', '~> 4.1'
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 gem 'sassc', '~> 2.0'
@@ -77,5 +77,4 @@ end
 
 platforms :mingw do
   # Windows-specific gems go here
-  gem 'tzinfo-data'
 end
