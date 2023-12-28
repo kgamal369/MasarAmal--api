@@ -3,7 +3,7 @@ class CmsComponentsController < ApplicationController
 
   # GET /components or /components.json
   def index
-    @components = Component.all
+    @components = CmsComponent.all
   end
 
   # GET /components/1 or /components/1.json
@@ -12,7 +12,7 @@ class CmsComponentsController < ApplicationController
 
   # GET /components/new
   def new
-    @component = Component.new
+    @component = CmsComponent.new
   end
 
   # GET /components/1/edit
@@ -21,7 +21,7 @@ class CmsComponentsController < ApplicationController
 
   # POST /components or /components.json
   def create
-    @component = Component.new(component_params)
+    @component = CmsComponent.new(component_params)
 
     respond_to do |format|
       if @component.save
@@ -60,11 +60,11 @@ class CmsComponentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_component
-      @component = Component.find(params[:id])
+      @component = CmsComponent.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def component_params
-      params.require(:component).permit(:Languages, :PageSection, :SectionComponent, :CMSValue)
+      params.require(:cms_component).permit(:Languages, :PageSection, :SectionComponent, :CMSValue)
     end
 end

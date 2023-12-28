@@ -1,2 +1,35 @@
 <div id="<%= dom_id cms_value %>">
+  <p>
+    <strong>Value:</strong>
+    <%= cms_value.value %>
+  </p>
+
+  <p>
+    <strong>Page Section:</strong>
+    <% if cms_value.cms_page_section %>
+      Page ID: <%= cms_value.cms_page_section.cms_page.pageid %>,
+      Section Name: <%= cms_value.cms_page_section.cms_section.section_name %>
+    <% else %>
+      No associated page section.
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Section Component:</strong>
+    <% if cms_value.cms_section_component %>
+      Section ID: <%= cms_value.cms_section_component.cms_section.sectionid %>,
+      Component Name: <%= cms_value.cms_section_component.cms_component.componentname %>
+    <% else %>
+      No associated section component.
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Language:</strong>
+    <% if cms_value.cms_language %>
+      Language Name: <%= cms_value.cms_language.languagename %>
+    <% else %>
+      No associated language.
+    <% end %>
+  </p>
 </div>

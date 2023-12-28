@@ -3,7 +3,7 @@ class CmsSectionComponentsController < ApplicationController
 
   # GET /section_components or /section_components.json
   def index
-    @section_components = SectionComponent.all
+    @section_components = CmsSectionComponent.all
   end
 
   # GET /section_components/1 or /section_components/1.json
@@ -12,7 +12,7 @@ class CmsSectionComponentsController < ApplicationController
 
   # GET /section_components/new
   def new
-    @section_component = SectionComponent.new
+    @section_component = CmsSectionComponent.new
   end
 
   # GET /section_components/1/edit
@@ -21,7 +21,7 @@ class CmsSectionComponentsController < ApplicationController
 
   # POST /section_components or /section_components.json
   def create
-    @section_component = SectionComponent.new(section_component_params)
+    @section_component = CmsSectionComponent.new(section_component_params)
 
     respond_to do |format|
       if @section_component.save
@@ -60,7 +60,7 @@ class CmsSectionComponentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_section_component
-      @section_component = SectionComponent.find(params[:id])
+      @section_component = CmsSectionComponent.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

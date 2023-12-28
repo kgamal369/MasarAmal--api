@@ -3,7 +3,7 @@ class CmsSectionsController  < ApplicationController
 
   # GET /sections or /sections.json
   def index
-    @sections = Section.all
+    @sections = CmsSection.all
   end
 
   # GET /sections/1 or /sections/1.json
@@ -12,7 +12,7 @@ class CmsSectionsController  < ApplicationController
 
   # GET /sections/new
   def new
-    @section = Section.new
+    @section = CmsSection.new
   end
 
   # GET /sections/1/edit
@@ -21,7 +21,7 @@ class CmsSectionsController  < ApplicationController
 
   # POST /sections or /sections.json
   def create
-    @section = Section.new(section_params)
+    @section = CmsSection.new(section_params)
 
     respond_to do |format|
       if @section.save
@@ -60,7 +60,7 @@ class CmsSectionsController  < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_section
-      @section = Section.find(params[:id])
+      @section = CmsSection.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

@@ -3,7 +3,7 @@ class CmsPagesController < ApplicationController
 
   # GET /pages or /pages.json
   def index
-    @pages = Page.all
+    @cms_pages = CmsPage.all
   end
 
   # GET /pages/1 or /pages/1.json
@@ -12,7 +12,7 @@ class CmsPagesController < ApplicationController
 
   # GET /pages/new
   def new
-    @page = Page.new
+    @page = CmsPage.new
   end
 
   # GET /pages/1/edit
@@ -21,7 +21,7 @@ class CmsPagesController < ApplicationController
 
   # POST /pages or /pages.json
   def create
-    @page = Page.new(page_params)
+    @page = CmsPage.new(page_params)
 
     respond_to do |format|
       if @page.save
@@ -60,7 +60,7 @@ class CmsPagesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_page
-      @page = Page.find(params[:id])
+      @page = CmsPage.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

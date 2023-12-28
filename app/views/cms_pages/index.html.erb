@@ -3,12 +3,13 @@
 <h1>Pages</h1>
 
 <div id="pages">
-  <% @pages.each do |page| %>
-    <%= render page %>
+  <% @cms_pages.each do |cms_page| %>
+    <%= render partial: "cms_pages/cms_page", locals: { page: cms_page } %>
     <p>
-      <%= link_to "Show this page", page %>
+      <%= link_to "Show this page", cms_page %>
     </p>
   <% end %>
 </div>
+
 
 <%= link_to "New page", new_page_path %>

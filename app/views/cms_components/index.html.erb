@@ -1,14 +1,10 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Components</h1>
-
-<div id="components">
-  <% @components.each do |component| %>
-    <%= render component %>
+<% if @cms_components.present? %>
+  <% @cms_components.each do |cms_component| %>
+    <%= render cms_component %>
     <p>
-      <%= link_to "Show this component", component %>
+      <%= link_to "Show this component", cms_component %>
     </p>
   <% end %>
-</div>
-
-<%= link_to "New component", new_component_path %>
+<% else %>
+  <p>No components available.</p>
+<% end %>

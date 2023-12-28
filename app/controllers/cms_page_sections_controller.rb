@@ -1,4 +1,4 @@
-class CmsComponentPageSectionsController < ApplicationController
+class CmsPageSectionsController < ApplicationController
   before_action :set_page_section, only: %i[ show edit update destroy ]
 
   # GET /page_sections or /page_sections.json
