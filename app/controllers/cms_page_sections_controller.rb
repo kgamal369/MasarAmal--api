@@ -3,7 +3,7 @@ class CmsPageSectionsController < ApplicationController
 
   # GET /page_sections or /page_sections.json
   def index
-    @page_sections = PageSection.all
+    @page_sections = CmsPageSection.all
   end
 
   # GET /page_sections/1 or /page_sections/1.json
@@ -12,7 +12,7 @@ class CmsPageSectionsController < ApplicationController
 
   # GET /page_sections/new
   def new
-    @page_section = PageSection.new
+    @page_section = CmsPageSection.new
   end
 
   # GET /page_sections/1/edit
@@ -21,7 +21,7 @@ class CmsPageSectionsController < ApplicationController
 
   # POST /page_sections or /page_sections.json
   def create
-    @page_section = PageSection.new(page_section_params)
+    @page_section = CmsPageSection.new(page_section_params)
 
     respond_to do |format|
       if @page_section.save
@@ -60,7 +60,7 @@ class CmsPageSectionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_page_section
-      @page_section = PageSection.find(params[:id])
+      @page_section = CmsPageSection.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

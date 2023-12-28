@@ -1,14 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Page sections</h1>
+<h1>Page Sections</h1>
 
 <div id="page_sections">
   <% @page_sections.each do |page_section| %>
-    <%= render page_section %>
+    <%= render partial: 'cms_page_section', locals: { cms_page_section: page_section } %>
     <p>
-      <%= link_to "Show this page section", page_section %>
+      <%= link_to "Show this page section", cms_page_section_path(page_section) %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New page section", new_page_section_path %>
+<%= link_to "New page section", new_cms_page_section_path %>
