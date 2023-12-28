@@ -4,9 +4,9 @@
 
 <div id="cms_values">
   <% @cms_values.each do |cms_value| %>
-    <%= render cms_value %>
+    <%= render partial: 'cms_value', locals: { cms_value: cms_value } %>
     <p>
-      <%= link_to "Show this cms value", cms_value %>
+      <%= link_to "Show this cms value", cms_value_path(cms_value) %>
     </p>
   <% end %>
 </div>
