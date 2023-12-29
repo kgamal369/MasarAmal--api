@@ -28,28 +28,14 @@ Rails.application.routes.draw do
   # Set ActiveAdmin dashboard as the root
   root to: 'admin/dashboard#index'
 
-   # Custom routes for language-specific filtering
-   get 'cms_values/arabic', to: 'cms_values#all_for_arabic', as: :cms_values_arabic
-   get 'cms_values/english', to: 'cms_values#all_for_english', as: :cms_values_english
- 
-   # Custom routes for page-specific filtering
-   get 'cms_values/home_page', to: 'cms_values#all_for_home_page', as: :cms_values_home_page
-   get 'cms_values/doctors_page', to: 'cms_values#all_for_doctors_page', as: :cms_values_doctors_page
-   get 'cms_values/treatment_page', to: 'cms_values#all_for_treatment_page', as: :cms_values_treatment_page
-   get 'cms_values/service_page', to: 'cms_values#all_for_service_page', as: :cms_values_service_page
- 
-   # Custom routes for combined page and language filtering
-   get 'cms_values/home_page/arabic', to: 'cms_values#home_page_arabic', as: :home_page_arabic_cms_values
-   get 'cms_values/home_page/english', to: 'cms_values#home_page_english', as: :home_page_english_cms_values
+  # Custom routes for language-specific filtering
+  get 'cms_values/language/:language', to: 'cms_values#filter_by_language', as: :cms_values_by_language
 
-   get 'cms_values/doctors_page/arabic', to: 'cms_values#all_for_doctors_page_arabic', as: :doctors_page_arabic_cms_values
-   get 'cms_values/doctors_page/english', to: 'cms_values#all_for_doctors_page_english', as: :doctors_page_english_cms_values
-  
-   get 'cms_values/treatment_page/arabic', to: 'cms_values#all_for_treatment_page_arabic', as: :treatment_page_page_arabic_cms_values
-   get 'cms_values/treatment_page/english', to: 'cms_values#all_for_treatment_page_english', as: :treatment_page_english_cms_values
-   
-   get 'cms_values/service_page/arabic', to: 'cms_values#all_for_service_page_arabic', as: :service_page_arabic_cms_values
-   get 'cms_values/service_page/english', to: 'cms_values#all_for_service_page_english', as: :service_page_english_cms_values
- 
+  # Custom routes for page-specific filtering
+  get 'cms_values/page/:page_name', to: 'cms_values#filter_by_page', as: :cms_values_by_page
+
+  # Custom routes for combined page and language filtering
+  get 'cms_values/:page_name/:language', to: 'cms_values#filter_by_page_and_language', as: :custom_cms_values
+
    # ... and so on for other page and language combinations
 end

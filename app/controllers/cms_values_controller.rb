@@ -36,7 +36,7 @@ class CmsValuesController < ApplicationController
   # Custom Actions for Specific Conditions
     def filter_by_language
       language = params[:language]
-      @cms_values = CmsValue.joins(:cms_language).where(cms_languages: { languagename: language })
+      @cms_values = CmsValue.joins(:cms_language).where(cms_languages: { language_name: language })
       render json: @cms_values
     end
 
@@ -59,10 +59,12 @@ class CmsValuesController < ApplicationController
     end
 
     def filter_values_by_page_and_language(page_name, language)
-      @cms_values = CmsValue.joins(cms_page_section: [:cms_page, :cms_language])
+      @cms_values = CmsValue.joins(:cms_language, cms_page_section: :cms_page)
                             .where(cms_pages: { pagename: page_name }, 
-                                  cms_languages: { languagename: language })
+                                  cms_languages: { language_name: language })
+
       render json: @cms_values
     end
+    
 
   end
