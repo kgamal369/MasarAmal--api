@@ -1,8 +1,8 @@
 # app/models/cms_value.rb
 class CmsValue < ApplicationRecord
-  belongs_to :cms_page_section
-  belongs_to :cms_section_component
-  belongs_to :cms_language
+  belongs_to :cms_page_section, foreign_key: 'pagesectionid'
+  belongs_to :cms_section_component, foreign_key: 'sectioncomponentid'
+  belongs_to :cms_language, foreign_key: 'languageid'
   validates :value, presence: true
 
   def self.ransackable_attributes(auth_object = nil)
