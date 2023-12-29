@@ -1,29 +1,50 @@
+# app/admin/cms_values.rb
 ActiveAdmin.register CmsValue do
+  # Permitting the right parameters
   permit_params :value, :cms_page_section_id, :cms_section_component_id, :cms_language_id
 
-  # Filters
-  filter :cms_page_section_id, as: :select, collection: -> { CmsPageSection.all.map { |ps| [ps.display_name, ps.id] } }
-  filter :cms_section_component_id, as: :select, collection: -> { CmsSectionComponent.all.map { |sc| [sc.display_name, sc.id] } }
-  filter :cms_language_id, as: :select, collection: -> { CmsLanguage.all.map { |lang| [lang.languagename, lang.id] } }
-
-  # Index Page Customization
+  # Index page configuration
   index do
     selectable_column
     id_column
     column :value
-    column :cms_page_section do |cms_value|
-      cms_value.cms_page_section.display_name if cms_value.cms_page_section
-    end
-    column :cms_section_component do |cms_value|
-      cms_value.cms_section_component.display_name if cms_value.cms_section_component
-    end
-    column :cms_language do |cms_value|
-      cms_value.cms_language.languagename if cms_value.cms_language
-    end
+    column :cms_page_section
+    column :cms_section_component
+    column :cms_language
     actions
   end
 
-  # Form Configuration
+  # Filter options
+  filter :value
+  filter :cms_page_section
+  filter :cms_section_component
+  filter :cms_language
+
+  # Show page configuration
+  show do
+    attributes_table do
+      row :value
+      row :cms_page_section do |cms_value|
+        if cms_value.cms_page_section
+          "Page ID: #{cms_value.cms_page_section.cms_page.pageid}, Section Name: #{cms_value.cms_page_section.cms_section.section_name}"
+        else
+          "No associated page section."
+        end
+      end
+      row :cms_section_component do |cms_value|
+        if cms_value.cms_section_component
+          "Section ID: #{cms_value.cms_section_component.cms_section.sectionid}, Component Name: #{cms_value.cms_section_component.cms_component.componentname}"
+        else
+          "No associated section component."
+        end
+      end
+      row :cms_language do |cms_value|
+        cms_value.cms_language&.languagename || "No associated language."
+      end
+    end
+  end
+
+  # Form configuration for Create and Edit actions
   form do |f|
     f.inputs do
       f.input :value
@@ -32,21 +53,5 @@ ActiveAdmin.register CmsValue do
       f.input :cms_language, as: :select, collection: CmsLanguage.all.map { |lang| [lang.languagename, lang.id] }
     end
     f.actions
-  end
-
-  # Show Page Customization
-  show do
-    attributes_table do
-      row :value
-      row :cms_page_section do |cms_value|
-        cms_value.cms_page_section.display_name if cms_value.cms_page_section
-      end
-      row :cms_section_component do |cms_value|
-        cms_value.cms_section_component.display_name if cms_value.cms_section_component
-      end
-      row :cms_language do |cms_value|
-        cms_value.cms_language.languagename if cms_value.cms_language
-      end
-    end
   end
 end
