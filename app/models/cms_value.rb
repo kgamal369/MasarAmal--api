@@ -12,4 +12,14 @@ class CmsValue < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     %w[cms_page_section cms_section_component cms_language]
   end
+
+  ransacker :page_name do
+    Arel.sql('(SELECT pagename FROM cms_pages WHERE cms_pages.pageid = cms_values.cms_page_section_id)')
+  end
+
+  scope :with_page_name, ->(page_name) {
+    joins(cms_page_section: :cms_page).where(cms_pages: { pagename: page_name })
+  }
+
+  
 end

@@ -9,32 +9,29 @@ ActiveAdmin.register CmsValue do
     id_column
     column :value
     column "Page Name" do |cms_value|
-      cms_value.cms_page_section.cms_page.pagename if cms_value.cms_page_section&.cms_page
+      cms_value.cms_page_section&.cms_page&.pagename
     end
     column "Section Name" do |cms_value|
-      cms_value.cms_page_section.cms_section.sectionname if cms_value.cms_page_section&.cms_section
+      cms_value.cms_page_section&.cms_section&.sectionname
     end
     column "Component Name" do |cms_value|
-      cms_value.cms_section_component.cms_component.componentname if cms_value.cms_section_component&.cms_component
+      cms_value.cms_section_component&.cms_component&.componentname
     end
     column "Language Name", sortable: 'cms_language.languagename' do |cms_value|
       cms_value.cms_language&.languagename || "No associated language"
     end
     actions
   end
-
+  
     # Set default sorting
     config.sort_order = 'cmsvalueid_asc'
 
     
     filter :value
     filter :cms_language_id, as: :select, collection: CmsLanguage.all.map { |lang| [lang.languagename, lang.id] }
-  
-    filter :page_name, as: :select, collection: CmsPage.all.map { |page| 
-      [page.pagename, page.pageid] 
-    }
- 
-  # Show page configuration
+    # filter :page_name, as: :select, collection: CmsPage.pluck(:pagename, :pageid)
+    # Show page configuration
+
   show do
     attributes_table do
       row :value
