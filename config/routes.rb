@@ -37,5 +37,11 @@ Rails.application.routes.draw do
   # Custom routes for combined page and language filtering
   get 'cms_values/:page_name/:language', to: 'cms_values#filter_by_page_and_language', as: :custom_cms_values
 
+
+  get 'cms_values/page/:page_name/section/:section_name', to: 'cms_values#filter_by_page_and_section', as: :cms_values_page_section
+  get 'cms_values/page/:page_name/section/:section_name/language/:language', to: 'cms_values#filter_by_page_section_and_language', as: :cms_values_page_section_language
+  get 'cms_values/page/:page_name/section/:section_name/component/:component_name', to: 'cms_values#filter_by_page_section_and_component', as: :cms_values_page_section_component
+  get 'cms_values/page/:page_name/section/:section_name/component/:component_name/language/:language', to: 'cms_values#filter_by_page_section_component_and_language', as: :cms_values_page_section_component_language
+
    # ... and so on for other page and language combinations
 end
