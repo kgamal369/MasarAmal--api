@@ -6,7 +6,7 @@ class CmsValue < ApplicationRecord
   validates :value, presence: true
 
   def self.ransackable_attributes(auth_object = nil)
-    %w[id value]
+    %w[id value cms_page_section_id cms_section_component_id cms_language_id]
   end
 
   def self.ransackable_associations(auth_object = nil)
