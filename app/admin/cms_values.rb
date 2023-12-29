@@ -28,7 +28,7 @@ ActiveAdmin.register CmsValue do
 
     
     filter :value
-    filter :cms_language_id, as: :select, collection: CmsLanguage.all.map { |lang| [lang.languagename, lang.id] }
+    filter :cms_language_id, as: :select, collection: -> { CmsLanguage.all.map { |lang| [lang.languagename, lang.id] } }
     # filter :page_name, as: :select, collection: CmsPage.pluck(:pagename, :pageid)
     # Show page configuration
 
@@ -59,9 +59,9 @@ ActiveAdmin.register CmsValue do
   form do |f|
     f.inputs do
       f.input :value
-      f.input :cms_page_section, as: :select, collection: CmsPageSection.all.map { |ps| [ps.display_name, ps.id] }
-      f.input :cms_section_component, as: :select, collection: CmsSectionComponent.all.map { |sc| [sc.display_name, sc.id] }
-      f.input :cms_language, as: :select, collection: CmsLanguage.all.map { |lang| [lang.languagename, lang.id] }
+      f.input :cms_page_section, as: :select, collection: -> { CmsPageSection.all.map { |ps| [ps.display_name, ps.id] } }
+      f.input :cms_section_component, as: :select, collection: -> { CmsSectionComponent.all.map { |sc| [sc.display_name, sc.id] } }
+      f.input :cms_language, as: :select, collection: -> { CmsLanguage.all.map { |lang| [lang.languagename, lang.id] } }
     end
     f.actions
   end
