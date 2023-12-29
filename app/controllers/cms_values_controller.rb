@@ -60,8 +60,8 @@ class CmsValuesController < ApplicationController
 
     def filter_values_by_page_and_language(page_name, language)
       @cms_values = CmsValue.joins(:cms_language, cms_page_section: :cms_page)
-                            .where(cms_pages: { pagename: page_name }, 
-                                  cms_languages: { language_name: language })
+      .where(cms_pages: { pagename: page_name }, 
+             cms_languages: { languagename: language })
 
       render json: @cms_values
     end
