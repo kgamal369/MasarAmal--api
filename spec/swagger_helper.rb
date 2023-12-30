@@ -24,10 +24,10 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: Rails.env.production? ? 'https://sea-turtle-app-zfqw2.ondigitalocean.app' : 'http://localhost:3000',
+          url:'https://sea-turtle-app-zfqw2.ondigitalocean.app',
           variables: {
             defaultHost: {
-              default: 'www.example.com'
+              default: 'https://sea-turtle-app-zfqw2.ondigitalocean.app'
             }
           }
         }
