@@ -7,7 +7,6 @@ class CmsPage < ApplicationRecord
     %w[id page_name]
   end
   def self.ransackable_associations(auth_object = nil)
-    # List the associations you want to be searchable
     ['page_sections']
   end
 end

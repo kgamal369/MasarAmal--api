@@ -11,5 +11,4 @@ class CmsSection < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     ['page_sections', 'section_components']
   end
-
 end

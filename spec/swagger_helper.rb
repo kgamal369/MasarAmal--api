@@ -24,7 +24,7 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: 'https://{defaultHost}',
+          url: Rails.env.production? ? 'https://sea-turtle-app-zfqw2.ondigitalocean.app' : 'http://localhost:3000',
           variables: {
             defaultHost: {
               default: 'www.example.com'

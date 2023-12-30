@@ -3,9 +3,260 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
-paths: {}
+paths:
+  "/cms_values":
+    get:
+      summary: Retrieves all CMS values
+      tags:
+      - CmsValues
+      responses:
+        '200':
+          description: CMS values found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    cmsvalueid:
+                      type: integer
+                    pagesectionid:
+                      type: integer
+                    sectioncomponentid:
+                      type: integer
+                    languageid:
+                      type: integer
+                    value:
+                      type: string
+    post:
+      summary: Creates a CMS value
+      tags:
+      - CmsValues
+      parameters: []
+      responses:
+        '201':
+          description: CMS value created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pagesectionid:
+                  type: integer
+                sectioncomponentid:
+                  type: integer
+                languageid:
+                  type: integer
+                value:
+                  type: string
+              required:
+              - pagesectionid
+              - sectioncomponentid
+              - languageid
+              - value
+  "/cms_values/{id}":
+    get:
+      summary: Retrieves a CMS value
+      tags:
+      - CmsValues
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: CMS value found
+        '404':
+          description: CMS value not found
+    put:
+      summary: Updates a CMS value
+      tags:
+      - CmsValues
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: CMS value updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pagesectionid:
+                  type: integer
+                sectioncomponentid:
+                  type: integer
+                languageid:
+                  type: integer
+                value:
+                  type: string
+    delete:
+      summary: Deletes a CMS value
+      tags:
+      - CmsValues
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: CMS value deleted
+  "/cms_values/language/{language}":
+    get:
+      summary: Retrieves CMS values by language
+      tags:
+      - CmsValues
+      parameters:
+      - name: language
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: CMS values found
+  "/cms_values/page/{page_name}":
+    get:
+      summary: Retrieves CMS values by page
+      tags:
+      - CmsValues
+      parameters:
+      - name: page_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: CMS values found
+  "/cms_values/{page_name}/{language}":
+    get:
+      summary: Retrieves CMS values by page and language
+      tags:
+      - CmsValues
+      parameters:
+      - name: page_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: language
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: CMS values found
+  "/cms_values/page/{page_name}/section/{section_name}":
+    get:
+      summary: Retrieves CMS values by page and section
+      tags:
+      - CmsValues
+      parameters:
+      - name: page_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: section_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: CMS values found
+  "/cms_values/page/{page_name}/section/{section_name}/language/{language}":
+    get:
+      summary: Retrieves CMS values by page, section, and language
+      tags:
+      - CmsValues
+      parameters:
+      - name: page_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: section_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: language
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: CMS values found
+  "/cms_values/page/{page_name}/section/{section_name}/component/{component_name}":
+    get:
+      summary: Retrieves CMS values by page, section, and component
+      tags:
+      - CmsValues
+      parameters:
+      - name: page_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: section_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: component_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: CMS values found
+  "/cms_values/page/{page_name}/section/{section_name}/component/{component_name}/language/{language}":
+    get:
+      summary: Retrieves CMS values by page, section, component, and language
+      tags:
+      - CmsValues
+      parameters:
+      - name: page_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: section_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: component_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: language
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: CMS values found
 servers:
-- url: https://{defaultHost}
+- url: http://localhost:3000
   variables:
     defaultHost:
       default: www.example.com

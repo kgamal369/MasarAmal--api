@@ -20,6 +20,4 @@ class CmsValue < ApplicationRecord
   scope :with_page_name, ->(page_name) {
     joins(cms_page_section: :cms_page).where(cms_pages: { pagename: page_name })
   }
-
-  
 end

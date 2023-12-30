@@ -28,7 +28,7 @@ ActiveAdmin.register CmsValue do
 
     
     filter :value
-    filter :cms_language_id, as: :select, collection: -> { CmsLanguage.all.map { |lang| [lang.languagename, lang.id] } }
+    filter :cms_language_id_eq, label: 'Language', as: :select, collection: -> { CmsLanguage.all.map { |lang| [lang.languagename, lang.id] } }
     # filter :page_name, as: :select, collection: CmsPage.pluck(:pagename, :pageid)
     # Show page configuration
 
