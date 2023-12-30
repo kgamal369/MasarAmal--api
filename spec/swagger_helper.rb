@@ -24,10 +24,10 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url:'https://sea-turtle-app-zfqw2.ondigitalocean.app',
+          url: 'https://sea-turtle-app-zfqw2.ondigitalocean.app',
           variables: {
             defaultHost: {
-              default: 'https://sea-turtle-app-zfqw2.ondigitalocean.app'
+              default: 'www.example.com'
             }
           }
         }
