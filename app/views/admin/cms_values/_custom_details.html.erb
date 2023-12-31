@@ -1,10 +1,19 @@
-<% if filter == 'home_page_hero_arabic' %>
+<% case filter %>
+<% when 'home_page_hero_arabic' %>
   <h3>Title Page Section: Home Page Hero Section Arabic</h3>
   <% CmsValue.where(pagesectionid: 1, languageid: 1).each do |cms_value| %>
     <div>
       <strong><%= cms_value.cms_section_component.cms_component.componentname %>:</strong>
-      <%= cms_value.value %>
-      <!-- Implement inline editing functionality here -->
+      <input type="text" class="editable" data-id="<%= cms_value.id %>" value="<%= cms_value.value %>">
+    </div>
+  <% end %>
+
+<% when 'home_page_hero_english' %>
+  <h3>Title Page Section: Home Page Hero Section English</h3>
+  <% CmsValue.where(pagesectionid: 1, languageid: 2).each do |cms_value| %>
+    <div>
+      <strong><%= cms_value.cms_section_component.cms_component.componentname %>:</strong>
+      <input type="text" class="editable" data-id="<%= cms_value.id %>" value="<%= cms_value.value %>">
     </div>
   <% end %>
 <% end %>

@@ -18,6 +18,18 @@ ActiveAdmin.register CmsValue do
       cms_value.cms_language.languagename
     end
     actions
+
+   # Custom panel based on filter
+   if params[:custom_filter]
+    case params[:custom_filter][:custom_filter]
+    when 'home_page_hero_arabic', 'home_page_hero_english'
+      panel "Details" do
+        render 'custom_details', context: self, filter: params[:custom_filter][:custom_filter]
+      end
+    end
+  end
+
+
   end
 
   # Adding filters
@@ -69,17 +81,8 @@ ActiveAdmin.register CmsValue do
     end
   end
 
-    # Custom section based on filter
-    sidebar :details, only: :index do
-      if params[:custom_filter]
-        case params[:custom_filter][:custom_filter]
-        when 'home_page_hero_arabic'
-          render 'custom_details', context: self, filter: 'home_page_hero_arabic'
-        # Add other cases here...
-        end
-      end
-    end
-    
+
+
   # Permitting parameters
   permit_params :value, :pagesectionid, :sectioncomponentid, :languageid
 end
