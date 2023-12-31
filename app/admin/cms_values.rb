@@ -1,68 +1,74 @@
 # app/admin/cms_values.rb
 ActiveAdmin.register CmsValue do
-  # Permitting the right parameters
-  permit_params :value, :cms_page_section_id, :cms_section_component_id, :cms_language_id
-
-  # Index page configuration with custom ordering and columns
+  # Customizing the index page
   index do
     selectable_column
     id_column
-    column :value
-    column "Page Name" do |cms_value|
-      cms_value.cms_page_section&.cms_page&.pagename
+    column "cms_value", :value
+    column "cms_page - pagename" do |cms_value|
+      cms_value.cms_page_section.cms_page.pagename
     end
-    column "Section Name" do |cms_value|
-      cms_value.cms_page_section&.cms_section&.sectionname
+    column "cms_section - sectionname" do |cms_value|
+      cms_value.cms_section_component.cms_section.sectionname
     end
-    column "Component Name" do |cms_value|
-      cms_value.cms_section_component&.cms_component&.componentname
+    column "cms_component - componentname" do |cms_value|
+      cms_value.cms_section_component.cms_component.componentname
     end
-    column "Language Name", sortable: 'cms_language.languagename' do |cms_value|
-      cms_value.cms_language&.languagename || "No associated language"
+    column "cms_language - languagename" do |cms_value|
+      cms_value.cms_language.languagename
     end
     actions
   end
-  
-    # Set default sorting
-    config.sort_order = 'cmsvalueid_asc'
 
-    
-    filter :value
-    filter :cms_language_id_eq, label: 'Language', as: :select, collection: -> { CmsLanguage.all.map { |lang| [lang.languagename, lang.id] } }
-    # filter :page_name, as: :select, collection: CmsPage.pluck(:pagename, :pageid)
-    # Show page configuration
+  # Adding filters
+  filter :cms_page_section_id, as: :select, collection: -> { CmsPageSection.all }
+  filter :cms_language_id, as: :select, collection: -> { CmsLanguage.all }
 
-  show do
-    attributes_table do
-      row :value
-      row :cms_page_section do |cms_value|
-        if cms_value.cms_page_section
-          "Page ID: #{cms_value.cms_page_section.cms_page.pageid}, Section Name: #{cms_value.cms_page_section.cms_section.section_name}"
-        else
-          "No associated page section."
-        end
-      end
-      row :cms_section_component do |cms_value|
-        if cms_value.cms_section_component
-          "Section ID: #{cms_value.cms_section_component.cms_section.sectionid}, Component Name: #{cms_value.cms_section_component.cms_component.componentname}"
-        else
-          "No associated section component."
-        end
-      end
-      row :cms_language do |cms_value|
-        cms_value.cms_language&.languagename || "No associated language."
+
+   # Custom filter
+  # filter :custom_filter, as: :select, collection: -> { CmsValue.filter_options }
+
+
+  # Custom scopes
+  scope :all, default: true
+  scope "Home Page Hero Section Arabic" do |scope|
+    scope.where(pagesectionid: 1, languageid: 1)
+  end
+
+  scope "Home Page Hero Section English" do |scope|
+    scope.where(pagesectionid: 1, languageid: 2)
+  end
+
+  # Add a sidebar for custom filtering
+  sidebar :custom_filter, only: :index do
+    form_for :custom_filter, url: admin_cms_values_path, method: :get do |f|
+      f.select :custom_filter, options_for_select(CmsValue.filter_options), include_blank: 'Select Filter'
+      f.submit 'Filter'
+    end
+  end
+
+  controller do
+    def scoped_collection
+      scope = super.includes(:cms_page_section, :cms_section_component, :cms_language)
+      apply_custom_filter(scope)
+    end
+
+    private
+
+    def apply_custom_filter(scope)
+      filter = params[:custom_filter] || {}
+      case filter[:custom_filter]
+      when 'home_page_hero_arabic'
+        scope.where(pagesectionid: 1, languageid: 1)
+      when 'home_page_hero_english'
+        scope.where(pagesectionid: 1, languageid: 2)
+      # Add other cases here...
+      else
+        scope
       end
     end
   end
 
-  # Form configuration for Create and Edit actions
-  form do |f|
-    f.inputs do
-      f.input :value
-      f.input :cms_page_section, as: :select, collection: -> { CmsPageSection.all.map { |ps| [ps.display_name, ps.id] } }
-      f.input :cms_section_component, as: :select, collection: -> { CmsSectionComponent.all.map { |sc| [sc.display_name, sc.id] } }
-      f.input :cms_language, as: :select, collection: -> { CmsLanguage.all.map { |lang| [lang.languagename, lang.id] } }
-    end
-    f.actions
-  end
+  # Permitting parameters
+  permit_params :value, :pagesectionid, :sectioncomponentid, :languageid
 end

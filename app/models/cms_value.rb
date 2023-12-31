@@ -13,6 +13,14 @@ class CmsValue < ApplicationRecord
     %w[cms_page_section cms_section_component cms_language]
   end
 
+  def self.filter_options
+    [
+      ['Home Page Hero Section Arabic', 'home_page_hero_arabic'],
+      ['Home Page Hero Section English', 'home_page_hero_english'],
+      # Add other options here...
+    ]
+  end
+  
   ransacker :page_name do
     Arel.sql('(SELECT pagename FROM cms_pages WHERE cms_pages.pageid = cms_values.cms_page_section_id)')
   end

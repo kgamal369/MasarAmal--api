@@ -13,6 +13,6 @@ class CmsPageSection < ApplicationRecord
   end
 
   def display_name
-    "#{cms_page.page_name} - #{cms_section.section_name}" if cms_page && cms_section
+    "#{cms_page.pagename} - #{cms_section.sectionname}" if cms_page && cms_section
   end
 end
