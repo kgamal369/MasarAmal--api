@@ -1,5 +1,5 @@
 class CmsComponentsController < ApplicationController
-  before_action :set_component, only: %i[ show edit update destroy ]
+  before_action :set_component, only: %i[show edit update destroy]
 
   # GET /components or /components.json
   def index
@@ -7,8 +7,7 @@ class CmsComponentsController < ApplicationController
   end
 
   # GET /components/1 or /components/1.json
-  def show
-  end
+  def show; end
 
   # GET /components/new
   def new
@@ -16,8 +15,7 @@ class CmsComponentsController < ApplicationController
   end
 
   # GET /components/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /components or /components.json
   def create
@@ -25,7 +23,7 @@ class CmsComponentsController < ApplicationController
 
     respond_to do |format|
       if @component.save
-        format.html { redirect_to component_url(@component), notice: "Component was successfully created." }
+        format.html { redirect_to component_url(@component), notice: 'Component was successfully created.' }
         format.json { render :show, status: :created, location: @component }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +36,7 @@ class CmsComponentsController < ApplicationController
   def update
     respond_to do |format|
       if @component.update(component_params)
-        format.html { redirect_to component_url(@component), notice: "Component was successfully updated." }
+        format.html { redirect_to component_url(@component), notice: 'Component was successfully updated.' }
         format.json { render :show, status: :ok, location: @component }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +50,20 @@ class CmsComponentsController < ApplicationController
     @component.destroy!
 
     respond_to do |format|
-      format.html { redirect_to components_url, notice: "Component was successfully destroyed." }
+      format.html { redirect_to components_url, notice: 'Component was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_component
-      @component = CmsComponent.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def component_params
-      params.require(:cms_component).permit(:Languages, :PageSection, :SectionComponent, :CMSValue)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_component
+    @component = CmsComponent.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def component_params
+    params.require(:cms_component).permit(:Languages, :PageSection, :SectionComponent, :CMSValue)
+  end
 end

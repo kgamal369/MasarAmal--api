@@ -1,18 +1,18 @@
 require 'rails_helper'
 
-RSpec.describe "pages/show", type: :view do
+RSpec.describe 'pages/show', type: :view do
   before(:each) do
     assign(:page, Page.create!(
-      Sections: "Sections",
-      Components: "Components",
-      Languages: "Languages",
-      PageSection: "Page Section",
-      SectionComponent: "Section Component",
-      CMSValue: "Cms Value"
-    ))
+                    Sections: 'Sections',
+                    Components: 'Components',
+                    Languages: 'Languages',
+                    PageSection: 'Page Section',
+                    SectionComponent: 'Section Component',
+                    CMSValue: 'Cms Value'
+                  ))
   end
 
-  it "renders attributes in <p>" do
+  it 'renders attributes in <p>' do
     render
     expect(rendered).to match(/Sections/)
     expect(rendered).to match(/Components/)

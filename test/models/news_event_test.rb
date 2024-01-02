@@ -8,7 +8,7 @@
 #  date_of_events :date
 #  last_modified  :datetime
 #
-require "test_helper"
+require 'test_helper'
 
 class NewsEventTest < ActiveSupport::TestCase
   # test "the truth" do

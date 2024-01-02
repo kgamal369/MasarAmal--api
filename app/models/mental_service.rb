@@ -9,8 +9,7 @@
 #
 # app/models/mental_service.rb
 class MentalService < ApplicationRecord
-    def self.ransackable_attributes(auth_object = nil)
-      super & %w[name text last_modified]
-    end
+  def self.ransackable_attributes(auth_object = nil)
+    super & %w[name text last_modified]
   end
-  
+end

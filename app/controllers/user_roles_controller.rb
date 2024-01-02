@@ -1,5 +1,5 @@
 class UserRolesController < ApplicationController
-  before_action :set_user_role, only: %i[ show edit update destroy ]
+  before_action :set_user_role, only: %i[show edit update destroy]
 
   # GET /user_roles or /user_roles.json
   def index
@@ -7,8 +7,7 @@ class UserRolesController < ApplicationController
   end
 
   # GET /user_roles/1 or /user_roles/1.json
-  def show
-  end
+  def show; end
 
   # GET /user_roles/new
   def new
@@ -16,8 +15,7 @@ class UserRolesController < ApplicationController
   end
 
   # GET /user_roles/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /user_roles or /user_roles.json
   def create
@@ -25,7 +23,7 @@ class UserRolesController < ApplicationController
 
     respond_to do |format|
       if @user_role.save
-        format.html { redirect_to user_role_url(@user_role), notice: "User role was successfully created." }
+        format.html { redirect_to user_role_url(@user_role), notice: 'User role was successfully created.' }
         format.json { render :show, status: :created, location: @user_role }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +36,7 @@ class UserRolesController < ApplicationController
   def update
     respond_to do |format|
       if @user_role.update(user_role_params)
-        format.html { redirect_to user_role_url(@user_role), notice: "User role was successfully updated." }
+        format.html { redirect_to user_role_url(@user_role), notice: 'User role was successfully updated.' }
         format.json { render :show, status: :ok, location: @user_role }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +50,20 @@ class UserRolesController < ApplicationController
     @user_role.destroy!
 
     respond_to do |format|
-      format.html { redirect_to user_roles_url, notice: "User role was successfully destroyed." }
+      format.html { redirect_to user_roles_url, notice: 'User role was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user_role
-      @user_role = UserRole.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def user_role_params
-      params.fetch(:user_role, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user_role
+    @user_role = UserRole.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def user_role_params
+    params.fetch(:user_role, {})
+  end
 end

@@ -1,4 +1,4 @@
-//= require active_admin/base
+// app/assets/javascripts/active_admin.js
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.editable').forEach(function(element) {
       element.addEventListener('blur', function() {
@@ -6,18 +6,17 @@ document.addEventListener('DOMContentLoaded', function() {
         var newValue = this.value;
   
         // AJAX request to update cms_value
-        // Example AJAX request using Fetch API
-        fetch('/path_to_update_action', {
-          method: 'POST',
+        fetch('/admin/cms_values/' + cmsValueId, {
+          method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
             'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
           },
-          body: JSON.stringify({ id: cmsValueId, value: newValue })
+          body: JSON.stringify({ cms_value: { value: newValue } })
         })
         .then(response => response.json())
         .then(data => {
-          console.log('Success:', data);
+          alert('Value updated successfully');
         })
         .catch((error) => {
           console.error('Error:', error);

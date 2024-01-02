@@ -1,7 +1,6 @@
 require 'swagger_helper'
 
 describe 'CmsValues API' do
-
   # Index action
   path '/cms_values' do
     get 'Retrieves all CMS values' do
@@ -37,7 +36,9 @@ describe 'CmsValues API' do
 
       response '200', 'CMS value found' do
         # Define response schema
-        let(:id) { CmsValue.create(pagesectionid: 1, sectioncomponentid: 1, languageid: 1, value: 'Example').cmsvalueid }
+        let(:id) do
+          CmsValue.create(pagesectionid: 1, sectioncomponentid: 1, languageid: 1, value: 'Example').cmsvalueid
+        end
         run_test!
       end
 
@@ -61,7 +62,7 @@ describe 'CmsValues API' do
           languageid: { type: :integer },
           value: { type: :string }
         },
-        required: ['pagesectionid', 'sectioncomponentid', 'languageid', 'value']
+        required: %w[pagesectionid sectioncomponentid languageid value]
       }
 
       response '201', 'CMS value created' do
@@ -88,7 +89,9 @@ describe 'CmsValues API' do
       }
 
       response '200', 'CMS value updated' do
-        let(:id) { CmsValue.create(pagesectionid: 1, sectioncomponentid: 1, languageid: 1, value: 'Example').cmsvalueid }
+        let(:id) do
+          CmsValue.create(pagesectionid: 1, sectioncomponentid: 1, languageid: 1, value: 'Example').cmsvalueid
+        end
         let(:cms_value) { { value: 'New Value' } }
         run_test!
       end
@@ -102,7 +105,9 @@ describe 'CmsValues API' do
       parameter name: :id, in: :path, type: :integer
 
       response '204', 'CMS value deleted' do
-        let(:id) { CmsValue.create(pagesectionid: 1, sectioncomponentid: 1, languageid: 1, value: 'Example').cmsvalueid }
+        let(:id) do
+          CmsValue.create(pagesectionid: 1, sectioncomponentid: 1, languageid: 1, value: 'Example').cmsvalueid
+        end
         run_test!
       end
     end
@@ -187,17 +192,17 @@ describe 'CmsValues API' do
     end
   end
 
- # ...
+  # ...
 
-# filter_by_page_section_and_component
-path '/cms_values/page/{page_name}/section/{section_name}/component/{component_name}' do
+  # filter_by_page_section_and_component
+  path '/cms_values/page/{page_name}/section/{section_name}/component/{component_name}' do
     get 'Retrieves CMS values by page, section, and component' do
       tags 'CmsValues'
       produces 'application/json'
       parameter name: :page_name, in: :path, type: :string
       parameter name: :section_name, in: :path, type: :string
       parameter name: :component_name, in: :path, type: :string
-  
+
       response '200', 'CMS values found' do
         let(:page_name) { 'HomePage' }
         let(:section_name) { 'Hero' }
@@ -206,7 +211,7 @@ path '/cms_values/page/{page_name}/section/{section_name}/component/{component_n
       end
     end
   end
-  
+
   # filter_by_page_section_component_and_language
   path '/cms_values/page/{page_name}/section/{section_name}/component/{component_name}/language/{language}' do
     get 'Retrieves CMS values by page, section, component, and language' do
@@ -216,7 +221,7 @@ path '/cms_values/page/{page_name}/section/{section_name}/component/{component_n
       parameter name: :section_name, in: :path, type: :string
       parameter name: :component_name, in: :path, type: :string
       parameter name: :language, in: :path, type: :string
-  
+
       response '200', 'CMS values found' do
         let(:page_name) { 'HomePage' }
         let(:section_name) { 'Hero' }
@@ -226,8 +231,6 @@ path '/cms_values/page/{page_name}/section/{section_name}/component/{component_n
       end
     end
   end
-  
-  # ... rest of your existing specs ...
-  
 
+  # ... rest of your existing specs ...
 end

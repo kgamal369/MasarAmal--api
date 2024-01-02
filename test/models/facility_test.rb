@@ -8,7 +8,7 @@
 #  pictures      :string
 #  last_modified :datetime
 #
-require "test_helper"
+require 'test_helper'
 
 class FacilityTest < ActiveSupport::TestCase
   # test "the truth" do

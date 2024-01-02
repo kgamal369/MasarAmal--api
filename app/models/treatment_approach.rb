@@ -9,8 +9,7 @@
 #
 # app/models/treatment_approach.rb
 class TreatmentApproach < ApplicationRecord
-    def self.ransackable_attributes(auth_object = nil)
-      super & %w[name text last_modified]
-    end
+  def self.ransackable_attributes(auth_object = nil)
+    super & %w[name text last_modified]
   end
-  
+end

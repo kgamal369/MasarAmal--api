@@ -10,7 +10,7 @@
 #  registration_date :datetime
 #  last_login        :datetime
 #
-require "test_helper"
+require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   # test "the truth" do

@@ -1,5 +1,5 @@
 class CmsSectionComponentsController < ApplicationController
-  before_action :set_section_component, only: %i[ show edit update destroy ]
+  before_action :set_section_component, only: %i[show edit update destroy]
 
   # GET /section_components or /section_components.json
   def index
@@ -7,8 +7,7 @@ class CmsSectionComponentsController < ApplicationController
   end
 
   # GET /section_components/1 or /section_components/1.json
-  def show
-  end
+  def show; end
 
   # GET /section_components/new
   def new
@@ -16,8 +15,7 @@ class CmsSectionComponentsController < ApplicationController
   end
 
   # GET /section_components/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /section_components or /section_components.json
   def create
@@ -25,7 +23,9 @@ class CmsSectionComponentsController < ApplicationController
 
     respond_to do |format|
       if @section_component.save
-        format.html { redirect_to section_component_url(@section_component), notice: "Section component was successfully created." }
+        format.html do
+          redirect_to section_component_url(@section_component), notice: 'Section component was successfully created.'
+        end
         format.json { render :show, status: :created, location: @section_component }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,9 @@ class CmsSectionComponentsController < ApplicationController
   def update
     respond_to do |format|
       if @section_component.update(section_component_params)
-        format.html { redirect_to section_component_url(@section_component), notice: "Section component was successfully updated." }
+        format.html do
+          redirect_to section_component_url(@section_component), notice: 'Section component was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @section_component }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +54,20 @@ class CmsSectionComponentsController < ApplicationController
     @section_component.destroy!
 
     respond_to do |format|
-      format.html { redirect_to section_components_url, notice: "Section component was successfully destroyed." }
+      format.html { redirect_to section_components_url, notice: 'Section component was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_section_component
-      @section_component = CmsSectionComponent.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def section_component_params
-      params.require(:section_component).permit(:CMSValue)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_section_component
+    @section_component = CmsSectionComponent.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def section_component_params
+    params.require(:section_component).permit(:CMSValue)
+  end
 end

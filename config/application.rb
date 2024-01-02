@@ -1,6 +1,6 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 require 'active_admin'
 require 'devise'
 
@@ -15,10 +15,10 @@ module MasarAmalApi
     # Use the Zeitwerk autoloader
     config.autoloader = :classic
     config.credentials = Rails.application.credentials
-   
+
     # Ensure that the Devise initializer is loaded
     config.to_prepare do
-      Devise::SessionsController.layout "active_admin"
+      Devise::SessionsController.layout 'active_admin'
     end
   end
 end

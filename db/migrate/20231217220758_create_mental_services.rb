@@ -1,8 +1,8 @@
 class CreateMentalServices < ActiveRecord::Migration[7.1]
   def change
-   # create_table :mental_services do |t|
+    # create_table :mental_services do |t|
 
-   #   t.timestamps
-    #end
+    #   t.timestamps
+    # end
   end
 end

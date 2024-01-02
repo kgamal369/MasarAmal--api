@@ -1,5 +1,5 @@
 class BlogPostsController < ApplicationController
-  before_action :set_blog_post, only: %i[ show edit update destroy ]
+  before_action :set_blog_post, only: %i[show edit update destroy]
 
   # GET /blog_posts or /blog_posts.json
   def index
@@ -7,8 +7,7 @@ class BlogPostsController < ApplicationController
   end
 
   # GET /blog_posts/1 or /blog_posts/1.json
-  def show
-  end
+  def show; end
 
   # GET /blog_posts/new
   def new
@@ -16,8 +15,7 @@ class BlogPostsController < ApplicationController
   end
 
   # GET /blog_posts/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /blog_posts or /blog_posts.json
   def create
@@ -25,7 +23,7 @@ class BlogPostsController < ApplicationController
 
     respond_to do |format|
       if @blog_post.save
-        format.html { redirect_to blog_post_url(@blog_post), notice: "Blog post was successfully created." }
+        format.html { redirect_to blog_post_url(@blog_post), notice: 'Blog post was successfully created.' }
         format.json { render :show, status: :created, location: @blog_post }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +36,7 @@ class BlogPostsController < ApplicationController
   def update
     respond_to do |format|
       if @blog_post.update(blog_post_params)
-        format.html { redirect_to blog_post_url(@blog_post), notice: "Blog post was successfully updated." }
+        format.html { redirect_to blog_post_url(@blog_post), notice: 'Blog post was successfully updated.' }
         format.json { render :show, status: :ok, location: @blog_post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +50,20 @@ class BlogPostsController < ApplicationController
     @blog_post.destroy!
 
     respond_to do |format|
-      format.html { redirect_to blog_posts_url, notice: "Blog post was successfully destroyed." }
+      format.html { redirect_to blog_posts_url, notice: 'Blog post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_blog_post
-      @blog_post = BlogPost.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def blog_post_params
-      params.fetch(:blog_post, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_blog_post
+    @blog_post = BlogPost.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def blog_post_params
+    params.fetch(:blog_post, {})
+  end
 end

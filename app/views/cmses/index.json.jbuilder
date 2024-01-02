@@ -1,1 +1,1 @@
-json.array! @cmses, partial: "cmses/cms", as: :cms
+json.array! @cmses, partial: 'cmses/cms', as: :cms

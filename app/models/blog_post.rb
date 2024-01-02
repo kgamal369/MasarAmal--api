@@ -9,7 +9,7 @@
 #
 # app/models/blog_post.rb
 class BlogPost < ApplicationRecord
-    def self.ransackable_attributes(auth_object = nil)
-      super & %w[header text last_modified]
-    end
+  def self.ransackable_attributes(auth_object = nil)
+    super & %w[header text last_modified]
   end
+end

@@ -1,1 +1,1 @@
-json.partial! "cmses/cms", cms: @cms
+json.partial! 'cmses/cms', cms: @cms

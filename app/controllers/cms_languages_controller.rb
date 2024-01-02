@@ -8,8 +8,7 @@ class CmsLanguagesController < ApplicationController
   end
 
   # GET /languages/1 or /languages/1.json
-  def show
-  end
+  def show; end
 
   # GET /languages/new
   def new
@@ -17,8 +16,7 @@ class CmsLanguagesController < ApplicationController
   end
 
   # GET /languages/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /languages or /languages.json
   def create
@@ -26,7 +24,7 @@ class CmsLanguagesController < ApplicationController
 
     respond_to do |format|
       if @language.save
-        format.html { redirect_to language_url(@language), notice: "Language was successfully created." }
+        format.html { redirect_to language_url(@language), notice: 'Language was successfully created.' }
         format.json { render :show, status: :created, location: @language }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +37,7 @@ class CmsLanguagesController < ApplicationController
   def update
     respond_to do |format|
       if @language.update(language_params)
-        format.html { redirect_to language_url(@language), notice: "Language was successfully updated." }
+        format.html { redirect_to language_url(@language), notice: 'Language was successfully updated.' }
         format.json { render :show, status: :ok, location: @language }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,12 +51,13 @@ class CmsLanguagesController < ApplicationController
     @language.destroy!
 
     respond_to do |format|
-      format.html { redirect_to cms_languages_url, notice: "Language was successfully destroyed." }
+      format.html { redirect_to cms_languages_url, notice: 'Language was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_language
     @language = CmsLanguage.find(params[:id])

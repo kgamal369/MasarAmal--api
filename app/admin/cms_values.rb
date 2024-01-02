@@ -4,32 +4,30 @@ ActiveAdmin.register CmsValue do
   index do
     selectable_column
     id_column
-    column "cms_value", :value
-    column "cms_page - pagename" do |cms_value|
+    column 'cms_value', :value
+    column 'cms_page - pagename' do |cms_value|
       cms_value.cms_page_section.cms_page.pagename
     end
-    column "cms_section - sectionname" do |cms_value|
+    column 'cms_section - sectionname' do |cms_value|
       cms_value.cms_section_component.cms_section.sectionname
     end
-    column "cms_component - componentname" do |cms_value|
+    column 'cms_component - componentname' do |cms_value|
       cms_value.cms_section_component.cms_component.componentname
     end
-    column "cms_language - languagename" do |cms_value|
+    column 'cms_language - languagename' do |cms_value|
       cms_value.cms_language.languagename
     end
     actions
 
-   # Custom panel based on filter
-   if params[:custom_filter]
-    case params[:custom_filter][:custom_filter]
-    when 'home_page_hero_arabic', 'home_page_hero_english'
-      panel "Details" do
-        render 'custom_details', context: self, filter: params[:custom_filter][:custom_filter]
+    # Custom panel based on filter
+    if params[:custom_filter]
+      case params[:custom_filter][:custom_filter]
+      when 'home_page_hero_arabic', 'home_page_hero_english'
+        panel 'Details' do
+          render 'custom_details', context: self, filter: params[:custom_filter][:custom_filter]
+        end
       end
     end
-  end
-
-
   end
 
   # Adding filters
@@ -37,17 +35,17 @@ ActiveAdmin.register CmsValue do
   filter :cms_language_id, as: :select, collection: -> { CmsLanguage.all }
 
 
-   # Custom filter
+  # Custom filter
   # filter :custom_filter, as: :select, collection: -> { CmsValue.filter_options }
 
 
   # Custom scopes
   scope :all, default: true
-  scope "Home Page Hero Section Arabic" do |scope|
+  scope 'Home Page Hero Section Arabic' do |scope|
     scope.where(pagesectionid: 1, languageid: 1)
   end
 
-  scope "Home Page Hero Section English" do |scope|
+  scope 'Home Page Hero Section English' do |scope|
     scope.where(pagesectionid: 1, languageid: 2)
   end
 

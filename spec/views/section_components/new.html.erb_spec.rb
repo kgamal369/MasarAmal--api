@@ -1,18 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe "section_components/new", type: :view do
+RSpec.describe 'section_components/new', type: :view do
   before(:each) do
     assign(:section_component, SectionComponent.new(
-      CMSValue: "MyString"
-    ))
+                                 CMSValue: 'MyString'
+                               ))
   end
 
-  it "renders new section_component form" do
+  it 'renders new section_component form' do
     render
 
-    assert_select "form[action=?][method=?]", section_components_path, "post" do
-
-      assert_select "input[name=?]", "section_component[CMSValue]"
+    assert_select 'form[action=?][method=?]', section_components_path, 'post' do
+      assert_select 'input[name=?]', 'section_component[CMSValue]'
     end
   end
 end

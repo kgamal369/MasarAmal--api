@@ -3,13 +3,13 @@ class CmsPageSection < ApplicationRecord
   belongs_to :cms_page, foreign_key: 'pageid'
   belongs_to :cms_section, foreign_key: 'sectionid'
   validates :cms_page, :cms_section, presence: true
- 
-  def self.ransackable_attributes(auth_object = nil)
+
+  def self.ransackable_attributes(_auth_object = nil)
     %w[cms_page_id cms_section_id]
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    ['cms_page', 'cms_section']
+  def self.ransackable_associations(_auth_object = nil)
+    %w[cms_page cms_section]
   end
 
   def display_name

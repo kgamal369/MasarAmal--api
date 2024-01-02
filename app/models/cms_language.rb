@@ -2,7 +2,7 @@
 class CmsLanguage < ApplicationRecord
   has_many :cms_values, foreign_key: 'languageid'
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["id", "language_name"]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[id language_name]
   end
 end

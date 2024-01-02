@@ -10,8 +10,7 @@
 #
 # app/models/facility.rb
 class Facility < ApplicationRecord
-    def self.ransackable_attributes(auth_object = nil)
-      super & %w[name text pictures last_modified]
-    end
+  def self.ransackable_attributes(auth_object = nil)
+    super & %w[name text pictures last_modified]
   end
-  
+end

@@ -1,19 +1,27 @@
 <% case filter %>
 <% when 'home_page_hero_arabic' %>
-  <h3>Title Page Section: Home Page Hero Section Arabic</h3>
-  <% CmsValue.where(pagesectionid: 1, languageid: 1).each do |cms_value| %>
-    <div>
-      <strong><%= cms_value.cms_section_component.cms_component.componentname %>:</strong>
-      <input type="text" class="editable" data-id="<%= cms_value.id %>" value="<%= cms_value.value %>">
+  <div class="details-section">
+    <h3 class="details-title">Title Page Section: Home Page Hero Section Arabic</h3>
+    <div class="details-content">
+      <% CmsValue.where(pagesectionid: 1, languageid: 1).each do |cms_value| %>
+        <div class="details-item">
+          <label class="details-label"><%= cms_value.cms_section_component.cms_component.componentname %>:</label>
+          <input type="text" class="editable details-input" data-id="<%= cms_value.id %>" value="<%= cms_value.value %>">
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 
 <% when 'home_page_hero_english' %>
-  <h3>Title Page Section: Home Page Hero Section English</h3>
-  <% CmsValue.where(pagesectionid: 1, languageid: 2).each do |cms_value| %>
-    <div>
-      <strong><%= cms_value.cms_section_component.cms_component.componentname %>:</strong>
-      <input type="text" class="editable" data-id="<%= cms_value.id %>" value="<%= cms_value.value %>">
+  <div class="details-section">
+    <h3 class="details-title">Title Page Section: Home Page Hero Section English</h3>
+    <div class="details-content">
+      <% CmsValue.where(pagesectionid: 1, languageid: 2).each do |cms_value| %>
+        <div class="details-item">
+          <label class="details-label"><%= cms_value.cms_section_component.cms_component.componentname %>:</label>
+          <input type="text" class="editable details-input" data-id="<%= cms_value.id %>" value="<%= cms_value.value %>">
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 <% end %>

@@ -11,7 +11,7 @@
 #  last_login        :datetime
 #
 class User < ApplicationRecord
-    def self.ransackable_attributes(auth_object = nil)
-        super & %w[user_id username password email full_name registration_date last_login]
-    end 
-    end
+  def self.ransackable_attributes(auth_object = nil)
+    super & %w[user_id username password email full_name registration_date last_login]
+  end
+end

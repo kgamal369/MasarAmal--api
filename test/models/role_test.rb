@@ -5,7 +5,7 @@
 #  role_id   :integer          not null, primary key
 #  role_name :string           not null
 #
-require "test_helper"
+require 'test_helper'
 
 class RoleTest < ActiveSupport::TestCase
   # test "the truth" do
