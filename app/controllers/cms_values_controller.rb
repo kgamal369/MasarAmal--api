@@ -54,23 +54,23 @@ class CmsValuesController < ApplicationController
   def filter_by_page_and_language
     page_name = params[:page_name]
     language = params[:language]
-
+  
     cms_values = CmsValue.joins(cms_page_section: [:cms_page])
                          .joins(cms_section_component: %i[cms_section cms_component])
                          .joins(:cms_language)
                          .where(cms_pages: { pagename: page_name }, cms_languages: { languagename: language })
                          .select('cms_values.*', 'cms_sections.sectionname', 'cms_components.componentname')
-
+  
     grouped_data = cms_values.group_by { |v| v.cms_section_component.cms_section.sectionname }
                              .transform_values do |section_values|
                                section_values.group_by { |v| v.cms_section_component.cms_component.componentname }
                                              .transform_values do |component_values|
-                                               component_values.map(&:value)
+                                               component_values.first.value
                                              end
                              end
-
+  
     render json: grouped_data
-  end
+  end  
 
   def filter_by_page_and_section
     page_name = params[:page_name]
