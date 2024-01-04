@@ -24,7 +24,7 @@
   
   .details-item {
     display: grid;
-    grid-template-columns: 1fr 3fr auto; 
+    grid-template-columns: 1fr 3fr auto;
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
@@ -58,4 +58,3 @@
   .details-save-button:hover {
     background-color: #0056b3;
   }
-  
