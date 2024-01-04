@@ -27,8 +27,8 @@ ActiveAdmin.register CmsValue do
   end
 
   # Removing unwanted filters
-  # filter :cms_page_section_id, as: :select, collection: -> { CmsPageSection.all }
-  # filter :cms_language_id, as: :select, collection: -> { CmsLanguage.all }
+   filter :cms_page_section_id, as: :select, collection: -> { CmsPageSection.all }
+   filter :cms_language_id, as: :select, collection: -> { CmsLanguage.all }
 
   # Custom scopes
   scope :all, default: true
