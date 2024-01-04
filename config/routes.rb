@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   resources :cms_components, path: 'components'
   resources :cms_sections, path: 'sections'
   resources :cms_pages, path: 'pages'
-  resources :cms_values, path: 'cms
-  '
+  resources :cms_values, path: 'cms_values'
+
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
   # ActiveAdmin routes

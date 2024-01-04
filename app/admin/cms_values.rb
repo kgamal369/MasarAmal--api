@@ -4,40 +4,25 @@ ActiveAdmin.register CmsValue do
   index do
     selectable_column
     id_column
-    column 'cms_value', :value
-    column 'cms_page - pagename' do |cms_value|
+    column 'Page Name' do |cms_value|
       cms_value.cms_page_section.cms_page.pagename
     end
-    column 'cms_section - sectionname' do |cms_value|
+    column 'Section Name' do |cms_value|
       cms_value.cms_section_component.cms_section.sectionname
     end
-    column 'cms_component - componentname' do |cms_value|
+    column 'Component Name' do |cms_value|
       cms_value.cms_section_component.cms_component.componentname
     end
-    column 'cms_language - languagename' do |cms_value|
+    column 'Language Name' do |cms_value|
       cms_value.cms_language.languagename
     end
+    column 'Value', :value
     actions
-
-    # Custom panel based on filter
-    if params[:custom_filter]
-      case params[:custom_filter][:custom_filter]
-      when 'home_page_hero_arabic', 'home_page_hero_english'
-        panel 'Details' do
-          render 'custom_details', context: self, filter: params[:custom_filter][:custom_filter]
-        end
-      end
-    end
   end
 
-  # Adding filters
-  filter :cms_page_section_id, as: :select, collection: -> { CmsPageSection.all }
-  filter :cms_language_id, as: :select, collection: -> { CmsLanguage.all }
-
-
-  # Custom filter
-  # filter :custom_filter, as: :select, collection: -> { CmsValue.filter_options }
-
+  # Removing unwanted filters
+  # filter :cms_page_section_id, as: :select, collection: -> { CmsPageSection.all }
+  # filter :cms_language_id, as: :select, collection: -> { CmsLanguage.all }
 
   # Custom scopes
   scope :all, default: true
@@ -72,15 +57,28 @@ ActiveAdmin.register CmsValue do
         scope.where(pagesectionid: 1, languageid: 1)
       when 'home_page_hero_english'
         scope.where(pagesectionid: 1, languageid: 2)
-      # Add other cases here...
       else
         scope
       end
     end
   end
 
-
-
   # Permitting parameters
   permit_params :value, :pagesectionid, :sectioncomponentid, :languageid
+
+  # Specific batch action for deletion
+  batch_action :destroy_multiple do |ids|
+    CmsValue.where(id: ids).destroy_all
+    redirect_to collection_path, alert: "Deleted #{ids.count} items"
+  end
+
+  # Custom panel based on filter, displayed below the main table
+  if params[:custom_filter]
+    case params[:custom_filter][:custom_filter]
+    when 'home_page_hero_arabic', 'home_page_hero_english'
+      panel 'Details' do
+        render 'custom_details', context: self, filter: params[:custom_filter][:custom_filter]
+      end
+    end
+  end
 end
