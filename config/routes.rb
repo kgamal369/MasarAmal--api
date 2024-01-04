@@ -14,13 +14,11 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   # Your main application routes
-
   resources :user_roles
   resources :roles
   resources :cmses
   resources :doctors
   resources :facilities
-
 
   # Health check route
   get 'up' => 'rails/health#show', as: :rails_health_check

@@ -31,14 +31,21 @@ ActiveAdmin.register CmsValue do
     end
   end
 
+   # Define batch actions
+   batch_action :destroy, confirm: "Are you sure you want to delete these items?" do |ids|
+    CmsValue.where(id: ids).destroy_all
+    redirect_to collection_path, alert: "The selected CmsValues have been deleted."
+  end
+
+  batch_action :dummy_action, label: "Dummy Action" do |ids|
+    # Dummy action logic here
+    redirect_to collection_path, notice: "Dummy action was successfully called on #{ids.count} items."
+  end
+
+
   # Adding filters
   filter :cms_page_section_id, as: :select, collection: -> { CmsPageSection.all }
   filter :cms_language_id, as: :select, collection: -> { CmsLanguage.all }
-
-
-  # Custom filter
-  # filter :custom_filter, as: :select, collection: -> { CmsValue.filter_options }
-
 
   # Custom scopes
   scope :all, default: true
@@ -79,9 +86,6 @@ ActiveAdmin.register CmsValue do
       end
     end
   end
-
-
-
   # Permitting parameters
   permit_params :value, :pagesectionid, :sectioncomponentid, :languageid
 end

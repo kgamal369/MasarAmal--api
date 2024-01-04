@@ -1,7 +1,7 @@
 <% case filter %>
 <% when 'home_page_hero_arabic' %>
   <div class="details-section">
-    <h3 class="details-title">Title Page Section: Home Page Hero Section Arabic</h3>
+    <h3 class="details-title">Home Page Hero Section Arabic</h3>
     <div class="details-content">
       <% CmsValue.where(pagesectionid: 1, languageid: 1).each do |cms_value| %>
         <div class="details-item">
@@ -15,7 +15,7 @@
 
 <% when 'home_page_hero_english' %>
   <div class="details-section">
-    <h3 class="details-title">Title Page Section: Home Page Hero Section English</h3>
+    <h3 class="details-title">Home Page Hero Section English</h3>
     <div class="details-content">
       <% CmsValue.where(pagesectionid: 1, languageid: 2).each do |cms_value| %>
         <div class="details-item">
