@@ -18,12 +18,6 @@ ActiveAdmin.register CmsValue do
     end
     column 'Value', :value
     actions
-
-    if @custom_details
-      panel 'Details' do
-        render 'custom_details', context: self, filter: @custom_details
-      end
-    end
   end
 
   # Removing unwanted filters
@@ -49,17 +43,6 @@ ActiveAdmin.register CmsValue do
   end
 
   controller do
-    def index
-      super do |format|
-        if params[:custom_filter]
-          case params[:custom_filter][:custom_filter]
-          when 'home_page_hero_arabic', 'home_page_hero_english'
-            @custom_details = params[:custom_filter][:custom_filter]
-          end
-        end
-      end
-    end
-
     def scoped_collection
       scope = super.includes(:cms_page_section, :cms_section_component, :cms_language)
       apply_custom_filter(scope)
@@ -89,4 +72,13 @@ ActiveAdmin.register CmsValue do
     redirect_to collection_path, alert: "Deleted #{ids.count} items"
   end
 
+  # Custom panel based on filter, displayed below the main table
+  if params[:custom_filter]
+    case params[:custom_filter][:custom_filter]
+    when 'home_page_hero_arabic', 'home_page_hero_english'
+      panel 'Details' do
+        render 'custom_details', context: self, filter: params[:custom_filter][:custom_filter]
+      end
+    end
+  end
 end
