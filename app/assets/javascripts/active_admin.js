@@ -1,15 +1,13 @@
 // app/assets/javascripts/active_admin.js
-
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.details-save-button').forEach(function(button) {
     button.addEventListener('click', function(event) {
-      event.preventDefault(); // Prevent default form submission behavior
+      event.preventDefault();
 
       var cmsValueId = this.dataset.id;
       var inputField = document.querySelector('.editable[data-id="' + cmsValueId + '"]');
       var newValue = inputField.value;
 
-      // AJAX request to update cms_value
       fetch('/admin/cms_values/' + cmsValueId, {
         method: 'PATCH',
         headers: {
@@ -18,12 +16,18 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         body: JSON.stringify({ cms_value: { value: newValue } })
       })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         alert('Value updated successfully');
       })
       .catch((error) => {
         console.error('Error:', error);
+        alert('Error updating value');
       });
     });
   });

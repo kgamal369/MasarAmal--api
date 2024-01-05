@@ -2,6 +2,7 @@
 class CmsSectionComponent < ApplicationRecord
   belongs_to :cms_section, foreign_key: 'sectionid'
   belongs_to :cms_component, foreign_key: 'componentid'
+  has_many :cms_values, foreign_key: 'sectioncomponentid'
   validates :cms_section, :cms_component, presence: true
 
   def self.ransackable_attributes(_auth_object = nil)

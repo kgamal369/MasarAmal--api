@@ -2,6 +2,7 @@
 class CmsPageSection < ApplicationRecord
   belongs_to :cms_page, foreign_key: 'pageid'
   belongs_to :cms_section, foreign_key: 'sectionid'
+  has_many :cms_values, foreign_key: 'pagesectionid'
   validates :cms_page, :cms_section, presence: true
 
   def self.ransackable_attributes(_auth_object = nil)

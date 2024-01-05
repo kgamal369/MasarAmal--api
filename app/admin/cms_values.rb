@@ -22,17 +22,18 @@ ActiveAdmin.register CmsValue do
 
     # Custom panel based on filter
     if params[:custom_filter]
-      case params[:custom_filter][:custom_filter]
+      filter = params[:custom_filter][:custom_filter]
+      case filter
       when 'home_page_hero_arabic', 'home_page_hero_english'
         panel 'Details' do
-          render 'custom_details', context: self, filter: params[:custom_filter][:custom_filter]
+          render 'custom_details', context: self, filter: filter
         end
       end
     end
   end
 
-   # Define batch actions
-   batch_action :destroy, confirm: "Are you sure you want to delete these items?" do |ids|
+  # Define batch actions
+  batch_action :destroy, confirm: "Are you sure you want to delete these items?" do |ids|
     CmsValue.where(id: ids).destroy_all
     redirect_to collection_path, alert: "The selected CmsValues have been deleted."
   end
@@ -40,6 +41,12 @@ ActiveAdmin.register CmsValue do
   batch_action :dummy_action, label: "Dummy Action" do |ids|
     # Dummy action logic here
     redirect_to collection_path, notice: "Dummy action was successfully called on #{ids.count} items."
+  end
+
+  # Handle case where no batch action is specified
+  batch_action :select_action do |ids|
+    # Implement logic or redirect
+    redirect_to collection_path, alert: "No action was selected."
   end
 
 
