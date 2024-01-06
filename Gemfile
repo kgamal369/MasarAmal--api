@@ -19,6 +19,7 @@ gem 'rswag', '~> 2.13'
 gem 'pg', '~> 1.1'
 gem 'rack-cors', '~> 2.0'
 gem 'sassc', '~> 2.0'
+gem 'aws-sdk-s3', require: false
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '>= 5.0'

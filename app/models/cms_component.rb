@@ -10,4 +10,9 @@ class CmsComponent < ApplicationRecord
   def self.ransackable_associations(_auth_object = nil)
     ['section_components']
   end
+  
+  def is_image_component?
+    ['Image', 'ButtonImage' ,'CoverPhoto'].include?(componentname)
+  end
+
 end

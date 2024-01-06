@@ -43,9 +43,11 @@ Rails.application.routes.draw do
       to: 'cms_values#filter_by_page_section_and_component', as: :cms_values_page_section_component
   get 'cms_values/page/:page_name/section/:section_name/component/:component_name/language/:language',
       to: 'cms_values#filter_by_page_section_component_and_language', as: :cms_values_page_section_component_language
-
+  
   namespace :admin do
     resources :cms_values, only: [:update]
   end
-  # ... and so on for other page and language combinations
+  get 'admin/sections_for_page/:page_id', to: 'cms_values#sections_for_page'
+  get 'admin/components_for_section/:section_id', to: 'cms_values#components_for_section'
+ # ... and so on for other page and language combinations
 end

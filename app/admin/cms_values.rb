@@ -27,11 +27,12 @@ ActiveAdmin.register CmsValue do
   # Permitting parameters
   permit_params :value, :pagesectionid, :sectioncomponentid, :languageid
 
-  # Form for adding and editing
   form do |f|
     f.inputs do
-      f.input :pagesectionid, as: :select, collection: CmsPageSection.includes(:cms_page).map { |ps| [ps.cms_page.pagename, ps.id] }
-      f.input :sectioncomponentid, as: :select, collection: CmsSectionComponent.includes(:cms_section, :cms_component).map { |sc| ["#{sc.cms_section.sectionname} - #{sc.cms_component.componentname}", sc.id] }
+      # Assuming CmsPageSection includes a reference to CmsPage
+      f.input :pagesectionid, as: :select, collection: CmsPageSection.includes(:cms_page).map { |ps| [ps.cms_page.pagename, ps.id] }, input_html: { id: 'cms_page_select' }
+      # Assuming CmsSectionComponent includes a reference to CmsSection and CmsComponent
+      f.input :sectioncomponentid, as: :select, collection: CmsSectionComponent.includes(:cms_section, :cms_component).map { |sc| ["#{sc.cms_section.sectionname} - #{sc.cms_component.componentname}", sc.id] }, input_html: { id: 'cms_section_select' }
       f.input :languageid, as: :select, collection: CmsLanguage.all.map { |l| [l.languagename, l.id] }
       f.input :value
     end

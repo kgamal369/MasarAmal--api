@@ -1,30 +1,33 @@
-//app/assets/javascripts/active_admin.js
 document.addEventListener('DOMContentLoaded', function() {
-  const saveButton = document.getElementById('save_button_id');
-  saveButton.addEventListener('click', function(event) {
-    event.preventDefault();
+  const pageSelect = document.getElementById('cms_page_select');
+  const sectionSelect = document.getElementById('cms_section_select');
+  const componentSelect = document.getElementById('cms_component_select');
 
-    const cmsValueId = document.getElementById('cms_value_id').value;
-    const value = document.getElementById('value_input_id').value;
-
-    fetch(`/admin/cms_values/${cmsValueId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      },
-      body: JSON.stringify({ cms_value: { value: value } })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.status === 'success') {
-        alert('Value updated successfully');
-      } else {
-        alert('Error updating value');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+  pageSelect.addEventListener('change', function() {
+    fetch(`/admin/sections_for_page/${this.value}`)
+      .then(response => response.json())
+      .then(sections => {
+        updateDropdown(sectionSelect, sections);
+        sectionSelect.disabled = false;
+        componentSelect.innerHTML = ''; // Reset component dropdown
+        componentSelect.disabled = true;
+      });
   });
+
+  sectionSelect.addEventListener('change', function() {
+    fetch(`/admin/components_for_section/${this.value}`)
+      .then(response => response.json())
+      .then(components => {
+        updateDropdown(componentSelect, components);
+        componentSelect.disabled = false;
+      });
+  });
+
+  function updateDropdown(dropdown, items) {
+    dropdown.innerHTML = '';
+    items.forEach(item => {
+      const option = new Option(item.name, item.id);
+      dropdown.appendChild(option);
+    });
+  }
 });

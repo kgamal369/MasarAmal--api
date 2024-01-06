@@ -17,6 +17,12 @@ class CmsValuesController < ApplicationController
 
   def create
     @cms_value = CmsValue.new(cms_value_params)
+    if cms_value.save
+      render json: cms_value, status: :created
+      redirect_to some_path, notice: 'CMS value was successfully created.'
+    else
+      render json: cms_value.errors, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -39,7 +45,7 @@ class CmsValuesController < ApplicationController
                          .joins('JOIN cms_components ON cms_section_components.componentid = cms_components.id')
                          .joins('JOIN cms_languages ON cms_values.languageid = cms_languages.id')
   end
-  
+
   def destroy
     @cms_value.destroy
   end
@@ -109,6 +115,18 @@ class CmsValuesController < ApplicationController
   end
 
   def cms_value_params
-    params.require(:cms_value).permit(:value)
+    params.require(:cms_value).permit(:pagesectionid, :sectioncomponentid, :languageid, :value)
+  end
+ 
+  def sections_for_page
+    page_id = params[:page_id]
+    sections = CmsSection.where(page_id: page_id).map { |s| { id: s.id, name: s.sectionname } }
+    render json: sections
+  end
+
+  def components_for_section
+    section_id = params[:section_id]
+    components = CmsComponent.where(section_id: section_id).map { |c| { id: c.id, name: c.componentname } }
+    render json: components
   end
 end
