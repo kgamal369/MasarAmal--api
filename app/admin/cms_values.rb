@@ -23,11 +23,12 @@ ActiveAdmin.register CmsValue do
     # Custom panel based on filter
     if params[:custom_filter]
       filter = params[:custom_filter][:custom_filter]
-      case filter
-      when 'home_page_hero_arabic', 'home_page_hero_english'
+      if ['home_page_hero_arabic', 'home_page_hero_english'].include?(filter)
         panel 'Details' do
           render 'custom_details', context: self, filter: filter
         end
+      else
+        Rails.logger.error "Invalid filter: #{filter}"
       end
     end
   end
@@ -48,7 +49,14 @@ ActiveAdmin.register CmsValue do
     # Implement logic or redirect
     redirect_to collection_path, alert: "No action was selected."
   end
+ 
+  batch_action :update_values do |ids, inputs|
+    CmsValue.where(id: ids).each do |cms_value|
+      cms_value.update(inputs)
+    end
 
+    redirect_to collection_path, notice: "Values updated successfully."
+  end
 
   # Adding filters
   filter :cms_page_section_id, as: :select, collection: -> { CmsPageSection.all }
