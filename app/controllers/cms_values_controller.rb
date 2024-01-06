@@ -29,6 +29,17 @@ class CmsValuesController < ApplicationController
     end
   end
 
+  def index
+    @cms_values = CmsValue.includes(:cms_page_section, :cms_section_component, :cms_language)
+                         .select('cms_values.id, cms_values.value, cms_pages.page_name as cms_page_pagename, cms_sections.section_name as cms_section_sectionname, cms_components.component_name as cms_component_componentname, cms_languages.language_name as cms_language_languagename')
+                         .joins('JOIN cms_page_sections ON cms_values.pagesectionid = cms_page_sections.id')
+                         .joins('JOIN cms_pages ON cms_page_sections.pageid = cms_pages.id')
+                         .joins('JOIN cms_section_components ON cms_values.sectioncomponentid = cms_section_components.id')
+                         .joins('JOIN cms_sections ON cms_section_components.sectionid = cms_sections.id')
+                         .joins('JOIN cms_components ON cms_section_components.componentid = cms_components.id')
+                         .joins('JOIN cms_languages ON cms_values.languageid = cms_languages.id')
+  end
+  
   def destroy
     @cms_value.destroy
   end
