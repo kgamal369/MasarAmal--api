@@ -46,8 +46,13 @@ Rails.application.routes.draw do
   
   namespace :admin do
     resources :cms_values, only: [:update]
+    resources :cms_values do
+      get :filter, on: :collection
+    end
   end
   get 'admin/sections_for_page/:page_id', to: 'cms_values#sections_for_page'
   get 'admin/components_for_section/:section_id', to: 'cms_values#components_for_section'
- # ... and so on for other page and language combinations
+  get 'admin/cms_values/filter', to: 'admin/cms_values#filter'
+
+  # ... and so on for other page and language combinations
 end

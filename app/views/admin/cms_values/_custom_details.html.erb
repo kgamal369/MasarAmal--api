@@ -1,29 +1,6 @@
-<% case local_assigns[:filter] %>
-<% when 'home_page_hero_arabic' %>
-  <div class="details-section">
-    <h3 class="details-title">Home Page Hero Section Arabic</h3>
-    <div class="details-content">
-      <% CmsValue.where(pagesectionid: 1, languageid: 1).each do |cms_value| %>
-        <div class="details-item">
-          <label class="details-label"><%= cms_value.cms_section_component.cms_component.componentname %>:</label>
-          <input type="text" class="editable details-input" data-id="<%= cms_value.id %>" value="<%= cms_value.value %>">
-          <button class="details-save-button" data-id="<%= cms_value.id %>">Save</button>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-<% when 'home_page_hero_english' %>
-  <div class="details-section">
-    <h3 class="details-title">Home Page Hero Section English</h3>
-    <div class="details-content">
-      <% CmsValue.where(pagesectionid: 1, languageid: 2).each do |cms_value| %>
-        <div class="details-item">
-          <label class="details-label"><%= cms_value.cms_section_component.cms_component.componentname %>:</label>
-          <input type="text" class="editable details-input" data-id="<%= cms_value.id %>" value="<%= cms_value.value %>">
-          <button class="details-save-button" data-id="<%= cms_value.id %>">Save</button>
-        </div>
-      <% end %>
-    </div>
-  </div>
+<%# app/views/admin/cms_values/_cms_value_form.html.erb %>
+<%= form_for [:admin, cms_value] do |f| %>
+  <%= f.label :component_name, cms_value.cms_section_component&.cms_component&.componentname %>
+  <%= f.text_field :value %>
+  <%= f.submit "Save" %>
 <% end %>

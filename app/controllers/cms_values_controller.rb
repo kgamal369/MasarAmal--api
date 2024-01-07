@@ -29,9 +29,12 @@ class CmsValuesController < ApplicationController
     cms_value = CmsValue.find(params[:id])
     if cms_value.update(cms_value_params)
       render json: { status: 'success', message: 'Value updated' }
+      redirect_to admin_cms_value_path(cms_value), notice: 'Value updated successfully.'
+
     else
       Rails.logger.error "Failed to update CmsValue: #{cms_value.errors.full_messages.join(', ')}"
       render json: { status: 'error', message: 'Update failed' }, status: :unprocessable_entity
+      render 'edit'
     end
   end
 
@@ -48,6 +51,20 @@ class CmsValuesController < ApplicationController
 
   def destroy
     @cms_value.destroy
+  end
+  
+  def filter
+    language_id = params[:languageid]
+    page_section_id = params[:pagesectionid]
+  
+    cms_values = CmsValue.joins(:cms_section_component, :cms_language)
+                         .where(languageid: language_id, pagesectionid: page_section_id)
+                         .select('cms_values.value, cms_components.componentname')
+                         .map do |v|
+                           { component_name: v.cms_section_component.cms_component.componentname, value: v.value }
+                         end
+  
+    render json: cms_values
   end
 
   def filter_by_language
@@ -99,6 +116,14 @@ class CmsValuesController < ApplicationController
     render json: @cms_values
   end
 
+  def filter
+    cms_value = CmsValue.find_by(pagesectionid: params[:pagesectionid])
+    if cms_value
+      render json: { component_name: cms_value.cms_section_component.cms_component.componentname, value: cms_value.value }
+    else
+      render json: {}, status: :not_found
+    end
+  end
 
   private
 
