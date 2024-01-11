@@ -1,8 +1,16 @@
+# //app/controllers/cms_values_controller.rb
 class CmsValuesController < ApplicationController
   before_action :set_cms_value, only: %i[show edit update destroy]
 
   def index
-    @cms_values = CmsValue.all
+    @cms_values = CmsValue.includes(:cms_page_section, :cms_section_component, :cms_language)
+                         .select('cms_values.id, cms_values.value, cms_pages.page_name as cms_page_pagename, cms_sections.section_name as cms_section_sectionname, cms_components.component_name as cms_component_componentname, cms_languages.language_name as cms_language_languagename')
+                         .joins('JOIN cms_page_sections ON cms_values.pagesectionid = cms_page_sections.id')
+                         .joins('JOIN cms_pages ON cms_page_sections.pageid = cms_pages.id')
+                         .joins('JOIN cms_section_components ON cms_values.sectioncomponentid = cms_section_components.id')
+                         .joins('JOIN cms_sections ON cms_section_components.sectionid = cms_sections.id')
+                         .joins('JOIN cms_components ON cms_section_components.componentid = cms_components.id')
+                         .joins('JOIN cms_languages ON cms_values.languageid = cms_languages.id')
   end
 
   def show
@@ -38,34 +46,24 @@ class CmsValuesController < ApplicationController
     end
   end
 
-  def index
-    @cms_values = CmsValue.includes(:cms_page_section, :cms_section_component, :cms_language)
-                         .select('cms_values.id, cms_values.value, cms_pages.page_name as cms_page_pagename, cms_sections.section_name as cms_section_sectionname, cms_components.component_name as cms_component_componentname, cms_languages.language_name as cms_language_languagename')
-                         .joins('JOIN cms_page_sections ON cms_values.pagesectionid = cms_page_sections.id')
-                         .joins('JOIN cms_pages ON cms_page_sections.pageid = cms_pages.id')
-                         .joins('JOIN cms_section_components ON cms_values.sectioncomponentid = cms_section_components.id')
-                         .joins('JOIN cms_sections ON cms_section_components.sectionid = cms_sections.id')
-                         .joins('JOIN cms_components ON cms_section_components.componentid = cms_components.id')
-                         .joins('JOIN cms_languages ON cms_values.languageid = cms_languages.id')
-  end
-
   def destroy
     @cms_value.destroy
   end
   
   def filter
-    language_id = params[:languageid]
-    page_section_id = params[:pagesectionid]
+    query = CmsValue.joins(:cms_section_component, :cms_language)
+    query = query.where(languageid: params[:languageid]) if params[:languageid].present?
+    query = query.where(pagesectionid: params[:pagesectionid]) if params[:pagesectionid].present?
   
-    cms_values = CmsValue.joins(:cms_section_component, :cms_language)
-                         .where(languageid: language_id, pagesectionid: page_section_id)
-                         .select('cms_values.value, cms_components.componentname')
-                         .map do |v|
-                           { component_name: v.cms_section_component.cms_component.componentname, value: v.value }
-                         end
+    cms_values = query.select('cms_values.value, cms_components.componentname')
+                      .map do |v|
+                        { component_name: v.cms_section_component.cms_component.componentname, value: v.value }
+                      end
   
     render json: cms_values
   end
+  
+ 
 
   def filter_by_language
     language = params[:language]
@@ -114,15 +112,6 @@ class CmsValuesController < ApplicationController
                                  cms_sections: { sectionname: section_name },
                                  cms_languages: { languagename: language })
     render json: @cms_values
-  end
-
-  def filter
-    cms_value = CmsValue.find_by(pagesectionid: params[:pagesectionid])
-    if cms_value
-      render json: { component_name: cms_value.cms_section_component.cms_component.componentname, value: cms_value.value }
-    else
-      render json: {}, status: :not_found
-    end
   end
 
   private

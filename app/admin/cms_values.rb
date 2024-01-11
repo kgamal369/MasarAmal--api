@@ -16,7 +16,13 @@ ActiveAdmin.register CmsValue do
     column 'Language Name' do |cms_value|
       cms_value.cms_language.languagename
     end
-    column 'Value', :value
+    column 'Value' do |cms_value|
+      if cms_value.cms_section_component.cms_component.is_image_component? && cms_value.image.attached?
+        image_tag url_for(cms_value.image), size: "50x50"
+       else
+        cms_value.value
+      end
+    end
 
     # actions do |cms_value|
     #   # Add a link or button to open the form
@@ -34,14 +40,18 @@ ActiveAdmin.register CmsValue do
   filter :pagesectionid, as: :select, collection: -> { CmsPageSection.includes(:cms_page, :cms_section).map { |ps| ["#{ps.cms_page.pagename} - #{ps.cms_section.sectionname}", ps.id] } }
 
   # Permitting parameters
-  permit_params :value, :pagesectionid, :sectioncomponentid, :languageid
+  permit_params :value, :pagesectionid, :sectioncomponentid, :languageid, :image
   
   form do |f|
     f.inputs do
       f.input :pagesectionid, as: :select, collection: CmsPageSection.includes(:cms_page).map { |ps| [ps.cms_page.pagename, ps.id] }, input_html: { id: 'cms_page_select' }
       f.input :sectioncomponentid, as: :select, collection: CmsSectionComponent.includes(:cms_section, :cms_component).map { |sc| ["#{sc.cms_section.sectionname} - #{sc.cms_component.componentname}", sc.id] }, input_html: { id: 'cms_section_select' }
       f.input :languageid, as: :select, collection: CmsLanguage.all.map { |l| [l.languagename, l.id] }
-      f.input :value
+      if f.object.cms_section_component&.cms_component&.is_image_component?
+        f.input :image, as: :file
+      else
+        f.input :value
+      end
     end
     f.actions
   end
@@ -51,7 +61,13 @@ ActiveAdmin.register CmsValue do
       row :pagesectionid
       row :sectioncomponentid
       row :languageid
-      row :value
+      row :value do |cms_value|
+        if cms_value.cms_section_component.cms_component.is_image_component? && cms_value.image.attached?
+          image_tag url_for(cms_value.image)
+        else
+          cms_value.value
+        end
+      end
     end
   end
 end
