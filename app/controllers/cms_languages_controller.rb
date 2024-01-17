@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # app/controllers/cms_languages_controller.rb
 class CmsLanguagesController < ApplicationController
   before_action :set_language, only: %i[show edit update destroy]

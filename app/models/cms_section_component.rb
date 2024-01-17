@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # app/models/cms_section_component.rb
 class CmsSectionComponent < ApplicationRecord
   belongs_to :cms_section, foreign_key: 'sectionid'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TreatmentApproachesController < ApplicationController
   before_action :set_treatment_approach, only: %i[show edit update destroy]
 

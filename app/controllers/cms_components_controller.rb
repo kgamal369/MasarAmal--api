@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CmsComponentsController < ApplicationController
   before_action :set_component, only: %i[show edit update destroy]
 

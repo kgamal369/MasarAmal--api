@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FacilitiesController < ApplicationController
   before_action :set_facility, only: %i[show edit update destroy]
 

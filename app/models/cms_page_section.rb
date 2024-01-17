@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # app/models/cms_page_section.rb
 class CmsPageSection < ApplicationRecord
   belongs_to :cms_page, foreign_key: 'pageid'

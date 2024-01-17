@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # //app/admin/cms_values.rb
 ActiveAdmin.register CmsValue do
   # Customizing the index page
@@ -18,8 +20,8 @@ ActiveAdmin.register CmsValue do
     end
     column 'Value' do |cms_value|
       if cms_value.cms_section_component.cms_component.is_image_component? && cms_value.image.attached?
-        image_tag url_for(cms_value.image), size: "50x50"
-       else
+        image_tag url_for(cms_value.image), size: '50x50'
+      else
         cms_value.value
       end
     end
@@ -37,20 +39,33 @@ ActiveAdmin.register CmsValue do
 
   # Adding filters
   filter :languageid, as: :select, collection: -> { CmsLanguage.all.map { |l| [l.languagename, l.id] } }
-  filter :pagesectionid, as: :select, collection: -> { CmsPageSection.includes(:cms_page, :cms_section).map { |ps| ["#{ps.cms_page.pagename} - #{ps.cms_section.sectionname}", ps.id] } }
+  filter :pagesectionid, as: :select, collection: lambda {
+                                                    CmsPageSection.includes(:cms_page, :cms_section).map do |ps|
+                                                      ["#{ps.cms_page.pagename} - #{ps.cms_section.sectionname}", ps.id]
+                                                    end
+                                                  }
 
   # Permitting parameters
   permit_params :value, :pagesectionid, :sectioncomponentid, :languageid, :image
-  
+
   form do |f|
     f.inputs do
-      f.input :pagesectionid, as: :select, collection: CmsPageSection.includes(:cms_page).map { |ps| [ps.cms_page.pagename, ps.id] }, input_html: { id: 'cms_page_select' }
-      f.input :sectioncomponentid, as: :select, collection: CmsSectionComponent.includes(:cms_section, :cms_component).map { |sc| ["#{sc.cms_section.sectionname} - #{sc.cms_component.componentname}", sc.id] }, input_html: { id: 'cms_section_select' }
+      f.input :page_id, as: :select, collection: CmsPage.all.map { |p| [p.pagename, p.id] },
+                        input_html: { id: 'cms_page_select' }, label: 'Page Name'
+
+      f.input :section_id, as: :select, collection: [],
+                           input_html: { id: 'cms_section_select', disabled: true }, label: 'Section Name'
+
+      f.input :component_id, as: :select, collection: [],
+                             input_html: { id: 'cms_component_select', disabled: true }, label: 'Component Name'
+
       f.input :languageid, as: :select, collection: CmsLanguage.all.map { |l| [l.languagename, l.id] }
+
       if f.object.cms_section_component&.cms_component&.is_image_component?
-        f.input :image, as: :file
+        f.input :image, as: :file, input_html: {id: 'image_input', style: 'display: none;' }
+
       else
-        f.input :value
+        f.input :value, input_html: { id: 'value_input' }
       end
     end
     f.actions
@@ -58,10 +73,19 @@ ActiveAdmin.register CmsValue do
 
   show do
     attributes_table do
-      row :pagesectionid
-      row :sectioncomponentid
-      row :languageid
-      row :value do |cms_value|
+      row 'Page Name' do |cms_value|
+        cms_value.cms_page_section.cms_page.pagename
+      end
+      row 'Section Name' do |cms_value|
+        cms_value.cms_section_component.cms_section.sectionname
+      end
+      row 'Component Name' do |cms_value|
+        cms_value.cms_section_component.cms_component.componentname
+      end
+      row 'Language Name' do |cms_value|
+        cms_value.cms_language.languagename
+      end
+      row 'Value' do |cms_value|
         if cms_value.cms_section_component.cms_component.is_image_component? && cms_value.image.attached?
           image_tag url_for(cms_value.image)
         else

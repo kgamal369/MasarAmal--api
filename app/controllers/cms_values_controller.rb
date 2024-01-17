@@ -1,27 +1,27 @@
+# frozen_string_literal: true
+
 # //app/controllers/cms_values_controller.rb
 class CmsValuesController < ApplicationController
   before_action :set_cms_value, only: %i[show edit update destroy]
 
   def index
     @cms_values = CmsValue.includes(:cms_page_section, :cms_section_component, :cms_language)
-                         .select('cms_values.id, cms_values.value, cms_pages.page_name as cms_page_pagename, cms_sections.section_name as cms_section_sectionname, cms_components.component_name as cms_component_componentname, cms_languages.language_name as cms_language_languagename')
-                         .joins('JOIN cms_page_sections ON cms_values.pagesectionid = cms_page_sections.id')
-                         .joins('JOIN cms_pages ON cms_page_sections.pageid = cms_pages.id')
-                         .joins('JOIN cms_section_components ON cms_values.sectioncomponentid = cms_section_components.id')
-                         .joins('JOIN cms_sections ON cms_section_components.sectionid = cms_sections.id')
-                         .joins('JOIN cms_components ON cms_section_components.componentid = cms_components.id')
-                         .joins('JOIN cms_languages ON cms_values.languageid = cms_languages.id')
+                          .select('cms_values.id, cms_values.value, cms_pages.page_name as cms_page_pagename, cms_sections.section_name as cms_section_sectionname, cms_components.component_name as cms_component_componentname, cms_languages.language_name as cms_language_languagename')
+                          .joins('JOIN cms_page_sections ON cms_values.pagesectionid = cms_page_sections.id')
+                          .joins('JOIN cms_pages ON cms_page_sections.pageid = cms_pages.id')
+                          .joins('JOIN cms_section_components ON cms_values.sectioncomponentid = cms_section_components.id')
+                          .joins('JOIN cms_sections ON cms_section_components.sectionid = cms_sections.id')
+                          .joins('JOIN cms_components ON cms_section_components.componentid = cms_components.id')
+                          .joins('JOIN cms_languages ON cms_values.languageid = cms_languages.id')
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @cms_value = CmsValue.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @cms_value = CmsValue.new(cms_value_params)
@@ -49,21 +49,19 @@ class CmsValuesController < ApplicationController
   def destroy
     @cms_value.destroy
   end
-  
+
   def filter
     query = CmsValue.joins(:cms_section_component, :cms_language)
     query = query.where(languageid: params[:languageid]) if params[:languageid].present?
     query = query.where(pagesectionid: params[:pagesectionid]) if params[:pagesectionid].present?
-  
+
     cms_values = query.select('cms_values.value, cms_components.componentname')
                       .map do |v|
                         { component_name: v.cms_section_component.cms_component.componentname, value: v.value }
                       end
-  
+
     render json: cms_values
   end
-  
- 
 
   def filter_by_language
     language = params[:language]
@@ -92,7 +90,7 @@ class CmsValuesController < ApplicationController
                                              end
                              end
     render json: grouped_data
-  end  
+  end
 
   def filter_by_page_and_section
     page_name = params[:page_name]
@@ -114,6 +112,33 @@ class CmsValuesController < ApplicationController
     render json: @cms_values
   end
 
+  def dropdownlist_sections_for_page
+    page_id = params[:page_id]
+    sections = CmsPageSection.where(pageid: page_id).includes(:cms_section).map do |cps|
+      { id: cps.cms_section.id, name: cps.cms_section.sectionname }
+    end
+    render json: sections
+  end
+
+  def dropdownlist_components_for_section
+    section_id = params[:section_id]
+    components = CmsSectionComponent.includes(:cms_component).where(sectionid: section_id).map do |sc|
+      { id: sc.cms_component.id, name: sc.cms_component.componentname }
+    end
+    render json: components
+  end
+
+  def is_image_component
+    component_id = params[:component_id]
+    component = CmsComponent.find(component_id)
+
+    if component
+      render json: { is_image_component: component.is_image_component? }
+    else
+      render json: { is_image_component: false }, status: :not_found
+    end
+  end
+
   private
 
   def filter_values_by_page(page_name)
@@ -130,17 +155,5 @@ class CmsValuesController < ApplicationController
 
   def cms_value_params
     params.require(:cms_value).permit(:pagesectionid, :sectioncomponentid, :languageid, :value)
-  end
- 
-  def sections_for_page
-    page_id = params[:page_id]
-    sections = CmsSection.where(page_id: page_id).map { |s| { id: s.id, name: s.sectionname } }
-    render json: sections
-  end
-
-  def components_for_section
-    section_id = params[:section_id]
-    components = CmsComponent.where(section_id: section_id).map { |c| { id: c.id, name: c.componentname } }
-    render json: components
   end
 end

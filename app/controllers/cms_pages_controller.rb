@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CmsPagesController < ApplicationController
   before_action :set_page, only: %i[show edit update destroy]
 

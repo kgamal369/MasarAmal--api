@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserRolesController < ApplicationController
   before_action :set_user_role, only: %i[show edit update destroy]
 

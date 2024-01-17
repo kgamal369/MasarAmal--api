@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CmsSectionsController < ApplicationController
   before_action :set_section, only: %i[show edit update destroy]
 

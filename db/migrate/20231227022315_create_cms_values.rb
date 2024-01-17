@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCmsValues < ActiveRecord::Migration[7.1]
   def change
     # create_table :cms_values do |t|

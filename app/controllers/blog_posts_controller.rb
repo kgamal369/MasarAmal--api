@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BlogPostsController < ApplicationController
   before_action :set_blog_post, only: %i[show edit update destroy]
 

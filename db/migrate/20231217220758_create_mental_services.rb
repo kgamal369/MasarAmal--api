@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateMentalServices < ActiveRecord::Migration[7.1]
   def change
     # create_table :mental_services do |t|

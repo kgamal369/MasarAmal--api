@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # app/models/cms_section.rb
 class CmsSection < ApplicationRecord
   has_many :page_sections, class_name: 'CmsPageSection', foreign_key: 'sectionid', dependent: :destroy

@@ -1,12 +1,17 @@
+# frozen_string_literal: true
+
 # app/models/cms_value.rb
 class CmsValue < ApplicationRecord
   belongs_to :cms_page_section, class_name: 'CmsPageSection', foreign_key: 'pagesectionid', optional: true
-  belongs_to :cms_section_component, class_name: 'CmsSectionComponent', foreign_key: 'sectioncomponentid', optional: true
+  belongs_to :cms_section_component, class_name: 'CmsSectionComponent', foreign_key: 'sectioncomponentid',
+                                     optional: true
   belongs_to :cms_language, class_name: 'CmsLanguage', foreign_key: 'languageid', optional: true
-  
+
   validates :value, presence: true
-  validates :pagesectionid, uniqueness: { scope: [:sectioncomponentid, :languageid], message: 'Combination of page, section, component, and language must be unique' }
-  
+  validates :pagesectionid,
+            uniqueness: { scope: %i[sectioncomponentid languageid],
+                          message: 'Combination of page, section, component, and language must be unique' }
+
   has_one_attached :image
 
   validate :image_type, if: -> { image.attached? }
@@ -23,11 +28,20 @@ class CmsValue < ApplicationRecord
     Arel.sql('languageid')
   end
 
+  # Virtual attributes for form
+  attr_accessor :page_id, :section_id, :component_id
+
   private
 
   def image_type
-    if image.attached? && !image.content_type.in?(%w[image/jpeg image/png])
-      errors.add(:image, 'must be a JPEG or PNG')
-    end
+    return unless image.attached? && !image.content_type.in?(%w[image/jpeg image/png])
+
+    errors.add(:image, 'must be a JPEG or PNG')
+  end
+
+  # Method to handle the creation or finding of the page section
+  def self.create_with_page_and_section(page_id, section_id, component_id, language_id, value)
+    page_section = CmsPageSection.find_or_create_by(cms_page_id: page_id, cms_section_id: section_id)
+    create(pagesectionid: page_section.id, sectioncomponentid: component_id, languageid: language_id, value:)
   end
 end
