@@ -46,7 +46,7 @@ ActiveAdmin.register CmsValue do
                                                   }
 
   # Permitting parameters
-  permit_params :value, :pagesectionid, :sectioncomponentid, :languageid, :image
+  permit_params :value, :pagesectionid, :sectioncomponentid, :languageid, :image, :page_id, :section_id, :component_id
 
   form do |f|
     f.inputs do
@@ -62,7 +62,7 @@ ActiveAdmin.register CmsValue do
       f.input :languageid, as: :select, collection: CmsLanguage.all.map { |l| [l.languagename, l.id] }
 
       if f.object.cms_section_component&.cms_component&.is_image_component?
-        f.input :image, as: :file, input_html: {id: 'image_input', style: 'display: none;' }
+        f.input :image, as: :file, input_html: { id: 'image_input', style: 'display: none;' }
 
       else
         f.input :value, input_html: { id: 'value_input' }
