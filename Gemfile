@@ -28,7 +28,6 @@ gem 'stimulus-rails'
 gem 'turbolinks', '~> 5.2'
 gem 'turbo-rails', '~> 1.5'
 gem 'tzinfo-data'
-gem 'webpacker', '~> 5.4'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri]
