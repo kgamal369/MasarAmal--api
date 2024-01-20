@@ -131,6 +131,9 @@ GEM
     connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.4)
+    debug (1.9.1)
+      irb (~> 1.10)
+      reline (>= 0.3.8)
     devise (4.9.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -145,6 +148,7 @@ GEM
     drb (2.2.0)
       ruby2_keywords
     erubi (1.12.0)
+    ffi (1.16.3)
     ffi (1.16.3-x64-mingw-ucrt)
     formtastic (5.0.0)
       actionpack (>= 6.0.0)
@@ -219,6 +223,8 @@ GEM
     nio4r (2.7.0)
     nokogiri (1.16.0-x64-mingw-ucrt)
       racc (~> 1.4)
+    nokogiri (1.16.0-x86_64-linux)
+      racc (~> 1.4)
     onload-transformer (0.2.1)
       sprockets (>= 2.0, <= 4)
     orm_adapter (0.5.0)
@@ -226,6 +232,7 @@ GEM
     parser (3.3.0.4)
       ast (~> 2.4.1)
       racc
+    pg (1.5.4)
     pg (1.5.4-x64-mingw-ucrt)
     psych (5.1.2)
       stringio
@@ -383,6 +390,7 @@ GEM
 
 PLATFORMS
   x64-mingw-ucrt
+  x86_64-linux
 
 DEPENDENCIES
   activeadmin (~> 3.2)
