@@ -2,23 +2,23 @@
 
 # app/admin/cms_sections.rb
 ActiveAdmin.register CmsSection do
-  permit_params :section_name
+  permit_params :sectionname
 
   # Index page
   index do
     selectable_column
     id_column
-    column :section_name, label: 'Section Name'
+    column :sectionname, label: 'Section Name'
     actions
   end
 
   # Filters
-  filter :section_name, label: 'Section Name'
+  filter :sectionname, label: 'Section Name'
 
   # Edit page
   form do |f|
     f.inputs 'Cms Section Details' do
-      f.input :section_name, label: 'Section Name'
+      f.input :sectionname, label: 'Section Name'
     end
     f.actions
   end
@@ -27,7 +27,7 @@ ActiveAdmin.register CmsSection do
   show do
     attributes_table do
       row :id
-      row :section_name, label: 'Section Name'
+      row :sectionname, label: 'Section Name'
     end
   end
 end

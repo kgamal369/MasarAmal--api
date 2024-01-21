@@ -1,6 +1,6 @@
 <%# app/views/admin/cms_values/_cms_value_form.html.erb %>
 <%= form_for [:admin, cms_value] do |f| %>
-  <%= f.label :component_name, cms_value.cms_section_component&.cms_component&.componentname %>
+  <%= f.label :componentname, cms_value.cms_section_component&.cms_component&.componentname %>
   <%= f.text_field :value %>
   <%= f.submit "Save" %>
 <% end %>

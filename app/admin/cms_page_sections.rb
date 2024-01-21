@@ -8,16 +8,16 @@ ActiveAdmin.register CmsPageSection do
     selectable_column
     id_column
     column 'Page Name' do |page_section|
-      page_section.cms_page.pagename if page_section.cms_page
+      page_section.cms_page&.pagename
     end
     column 'Section Name' do |page_section|
-      page_section.cms_section.sectionname if page_section.cms_section
+      page_section.cms_section&.sectionname
     end
     actions
   end
 
-  # filter :cms_page_pagename, as: :string, label: 'Page Name'
-  # filter :cms_section_sectionname, as: :string, label: 'Section Name'
+  filter :cms_page_pagename_cont, as: :string, label: 'Page Name'
+  filter :cms_section_sectionname_cont, as: :string, label: 'Section Name'
 
   form do |f|
     f.inputs 'Cms Page Section Details' do
@@ -31,10 +31,10 @@ ActiveAdmin.register CmsPageSection do
     attributes_table do
       row :id
       row 'Page Name' do |section|
-        section.cms_page.pagename if section.cms_page
+        section.cms_page&.pagename
       end
       row 'Section Name' do |section|
-        section.cms_section.sectionname if section.cms_section
+        section.cms_section&.sectionname
       end
     end
   end

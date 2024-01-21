@@ -126,13 +126,13 @@ paths:
       responses:
         '200':
           description: CMS values found
-  "/cms_values/page/{page_name}":
+  "/cms_values/page/{pagename}":
     get:
       summary: Retrieves CMS values by page
       tags:
       - CmsValues
       parameters:
-      - name: page_name
+      - name: pagename
         in: path
         required: true
         schema:
@@ -140,13 +140,13 @@ paths:
       responses:
         '200':
           description: CMS values found
-  "/cms_values/{page_name}/{language}":
+  "/cms_values/{pagename}/{language}":
     get:
       summary: Retrieves CMS values by page and language
       tags:
       - CmsValues
       parameters:
-      - name: page_name
+      - name: pagename
         in: path
         required: true
         schema:
@@ -159,18 +159,18 @@ paths:
       responses:
         '200':
           description: CMS values found
-  "/cms_values/page/{page_name}/section/{section_name}":
+  "/cms_values/page/{pagename}/section/{sectionname}":
     get:
       summary: Retrieves CMS values by page and section
       tags:
       - CmsValues
       parameters:
-      - name: page_name
+      - name: pagename
         in: path
         required: true
         schema:
           type: string
-      - name: section_name
+      - name: sectionname
         in: path
         required: true
         schema:
@@ -178,18 +178,18 @@ paths:
       responses:
         '200':
           description: CMS values found
-  "/cms_values/page/{page_name}/section/{section_name}/language/{language}":
+  "/cms_values/page/{pagename}/section/{sectionname}/language/{language}":
     get:
       summary: Retrieves CMS values by page, section, and language
       tags:
       - CmsValues
       parameters:
-      - name: page_name
+      - name: pagename
         in: path
         required: true
         schema:
           type: string
-      - name: section_name
+      - name: sectionname
         in: path
         required: true
         schema:
@@ -202,23 +202,23 @@ paths:
       responses:
         '200':
           description: CMS values found
-  "/cms_values/page/{page_name}/section/{section_name}/component/{component_name}":
+  "/cms_values/page/{pagename}/section/{sectionname}/component/{componentname}":
     get:
       summary: Retrieves CMS values by page, section, and component
       tags:
       - CmsValues
       parameters:
-      - name: page_name
+      - name: pagename
         in: path
         required: true
         schema:
           type: string
-      - name: section_name
+      - name: sectionname
         in: path
         required: true
         schema:
           type: string
-      - name: component_name
+      - name: componentname
         in: path
         required: true
         schema:
@@ -226,23 +226,23 @@ paths:
       responses:
         '200':
           description: CMS values found
-  "/cms_values/page/{page_name}/section/{section_name}/component/{component_name}/language/{language}":
+  "/cms_values/page/{pagename}/section/{sectionname}/component/{componentname}/language/{language}":
     get:
       summary: Retrieves CMS values by page, section, component, and language
       tags:
       - CmsValues
       parameters:
-      - name: page_name
+      - name: pagename
         in: path
         required: true
         schema:
           type: string
-      - name: section_name
+      - name: sectionname
         in: path
         required: true
         schema:
           type: string
-      - name: component_name
+      - name: componentname
         in: path
         required: true
         schema:

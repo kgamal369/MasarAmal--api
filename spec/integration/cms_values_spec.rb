@@ -131,29 +131,29 @@ describe 'CmsValues API' do
   end
 
   # filter_by_page
-  path '/cms_values/page/{page_name}' do
+  path '/cms_values/page/{pagename}' do
     get 'Retrieves CMS values by page' do
       tags 'CmsValues'
       produces 'application/json'
-      parameter name: :page_name, in: :path, type: :string
+      parameter name: :pagename, in: :path, type: :string
 
       response '200', 'CMS values found' do
-        let(:page_name) { 'HomePage' }
+        let(:pagename) { 'HomePage' }
         run_test!
       end
     end
   end
 
   # filter_by_page_and_language
-  path '/cms_values/{page_name}/{language}' do
+  path '/cms_values/{pagename}/{language}' do
     get 'Retrieves CMS values by page and language' do
       tags 'CmsValues'
       produces 'application/json'
-      parameter name: :page_name, in: :path, type: :string
+      parameter name: :pagename, in: :path, type: :string
       parameter name: :language, in: :path, type: :string
 
       response '200', 'CMS values found' do
-        let(:page_name) { 'HomePage' }
+        let(:pagename) { 'HomePage' }
         let(:language) { 'en' }
         run_test!
       end
@@ -161,33 +161,33 @@ describe 'CmsValues API' do
   end
 
   # filter_by_page_and_section
-  path '/cms_values/page/{page_name}/section/{section_name}' do
+  path '/cms_values/page/{pagename}/section/{sectionname}' do
     get 'Retrieves CMS values by page and section' do
       tags 'CmsValues'
       produces 'application/json'
-      parameter name: :page_name, in: :path, type: :string
-      parameter name: :section_name, in: :path, type: :string
+      parameter name: :pagename, in: :path, type: :string
+      parameter name: :sectionname, in: :path, type: :string
 
       response '200', 'CMS values found' do
-        let(:page_name) { 'HomePage' }
-        let(:section_name) { 'Hero' }
+        let(:pagename) { 'HomePage' }
+        let(:sectionname) { 'Hero' }
         run_test!
       end
     end
   end
 
   # filter_by_page_section_and_language
-  path '/cms_values/page/{page_name}/section/{section_name}/language/{language}' do
+  path '/cms_values/page/{pagename}/section/{sectionname}/language/{language}' do
     get 'Retrieves CMS values by page, section, and language' do
       tags 'CmsValues'
       produces 'application/json'
-      parameter name: :page_name, in: :path, type: :string
-      parameter name: :section_name, in: :path, type: :string
+      parameter name: :pagename, in: :path, type: :string
+      parameter name: :sectionname, in: :path, type: :string
       parameter name: :language, in: :path, type: :string
 
       response '200', 'CMS values found' do
-        let(:page_name) { 'HomePage' }
-        let(:section_name) { 'Hero' }
+        let(:pagename) { 'HomePage' }
+        let(:sectionname) { 'Hero' }
         let(:language) { 'en' }
         run_test!
       end
@@ -197,37 +197,37 @@ describe 'CmsValues API' do
   # ...
 
   # filter_by_page_section_and_component
-  path '/cms_values/page/{page_name}/section/{section_name}/component/{component_name}' do
+  path '/cms_values/page/{pagename}/section/{sectionname}/component/{componentname}' do
     get 'Retrieves CMS values by page, section, and component' do
       tags 'CmsValues'
       produces 'application/json'
-      parameter name: :page_name, in: :path, type: :string
-      parameter name: :section_name, in: :path, type: :string
-      parameter name: :component_name, in: :path, type: :string
+      parameter name: :pagename, in: :path, type: :string
+      parameter name: :sectionname, in: :path, type: :string
+      parameter name: :componentname, in: :path, type: :string
 
       response '200', 'CMS values found' do
-        let(:page_name) { 'HomePage' }
-        let(:section_name) { 'Hero' }
-        let(:component_name) { 'PageTitle' }
+        let(:pagename) { 'HomePage' }
+        let(:sectionname) { 'Hero' }
+        let(:componentname) { 'PageTitle' }
         run_test!
       end
     end
   end
 
   # filter_by_page_section_component_and_language
-  path '/cms_values/page/{page_name}/section/{section_name}/component/{component_name}/language/{language}' do
+  path '/cms_values/page/{pagename}/section/{sectionname}/component/{componentname}/language/{language}' do
     get 'Retrieves CMS values by page, section, component, and language' do
       tags 'CmsValues'
       produces 'application/json'
-      parameter name: :page_name, in: :path, type: :string
-      parameter name: :section_name, in: :path, type: :string
-      parameter name: :component_name, in: :path, type: :string
+      parameter name: :pagename, in: :path, type: :string
+      parameter name: :sectionname, in: :path, type: :string
+      parameter name: :componentname, in: :path, type: :string
       parameter name: :language, in: :path, type: :string
 
       response '200', 'CMS values found' do
-        let(:page_name) { 'HomePage' }
-        let(:section_name) { 'Hero' }
-        let(:component_name) { 'PageTitle' }
+        let(:pagename) { 'HomePage' }
+        let(:sectionname) { 'Hero' }
+        let(:componentname) { 'PageTitle' }
         let(:language) { 'en' }
         run_test!
       end

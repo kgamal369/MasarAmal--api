@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # app/admin/cms_section_components.rb
 ActiveAdmin.register CmsSectionComponent do
   permit_params :cms_section_id, :cms_component_id
@@ -15,9 +16,9 @@ ActiveAdmin.register CmsSectionComponent do
     actions
   end
 
-  # Update filters to match the actual attribute names in the models
-  filter :cms_section_sectionname, as: :string, label: 'Section Name'
-  filter :cms_component_componentname, as: :string, label: 'Component Name'
+  # # Update filters to match the actual attribute names in the models
+  filter :cms_section_sectionname_cont, as: :string, label: 'Section Name'
+  filter :cms_component_componentname_cont, as: :string, label: 'Component Name'
 
   form do |f|
     f.inputs 'Cms Section Component Details' do
@@ -31,12 +32,11 @@ ActiveAdmin.register CmsSectionComponent do
     attributes_table do
       row :id
       row :sectionname do |component|
-        component.cms_section.sectionname if component.cms_section
+        component.cms_section&.sectionname
       end
       row :componentname do |component|
-        component.cms_component.componentname if component.cms_component
+        component.cms_component&.componentname
       end
     end
   end
 end
-

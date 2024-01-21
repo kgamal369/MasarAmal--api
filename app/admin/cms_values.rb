@@ -7,19 +7,19 @@ ActiveAdmin.register CmsValue do
     selectable_column
     id_column
     column 'Page Name' do |cms_value|
-      cms_value.cms_page_section.cms_page.pagename
+      cms_value.cms_page_section&.cms_page&.pagename
     end
     column 'Section Name' do |cms_value|
-      cms_value.cms_section_component.cms_section.sectionname
+      cms_value.cms_section_component&.cms_section&.sectionname
     end
     column 'Component Name' do |cms_value|
-      cms_value.cms_section_component.cms_component.componentname
+      cms_value.cms_section_component&.cms_component&.componentname
     end
     column 'Language Name' do |cms_value|
-      cms_value.cms_language.languagename
+      cms_value.cms_language&.languagename
     end
     column 'Value' do |cms_value|
-      if cms_value.cms_section_component.cms_component.is_image_component? && cms_value.image.attached?
+      if cms_value.cms_section_component&.cms_component&.is_image_component? && cms_value.image.attached?
         image_tag url_for(cms_value.image), size: '50x50'
       else
         cms_value.value

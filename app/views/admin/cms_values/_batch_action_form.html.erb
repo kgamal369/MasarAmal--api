@@ -1,8 +1,8 @@
 <%# app/views/admin/cms_values/_batch_action_form.html.erb %>
 <%= form_for batch_action_admin_cms_values_path, method: :post do %>
   <%= hidden_field_tag :batch_action, 'update_values' %>
-  <%= text_field_tag 'inputs[page_name]' %>
-  <%= text_field_tag 'inputs[section_name]' %>
+  <%= text_field_tag 'inputs[pagename]' %>
+  <%= text_field_tag 'inputs[sectionname]' %>
   <%= text_field_tag 'inputs[language]' %>
   <%= submit_tag 'Save' %>
 <% end %>

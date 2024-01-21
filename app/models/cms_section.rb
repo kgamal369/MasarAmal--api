@@ -4,10 +4,10 @@
 class CmsSection < ApplicationRecord
   has_many :page_sections, class_name: 'CmsPageSection', foreign_key: 'sectionid', dependent: :destroy
   has_many :section_components, class_name: 'CmsSectionComponent', foreign_key: 'sectionid', dependent: :destroy
-  validates :section_name, presence: true
+  validates :sectionname, presence: true
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[id section_name]
+    %w[id sectionname]
   end
 
   def self.ransackable_associations(_auth_object = nil)

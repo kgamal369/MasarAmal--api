@@ -2,25 +2,25 @@
 
 # app/admin/cms_components.rb
 ActiveAdmin.register CmsComponent do
-  permit_params :component_name, :component_type
+  permit_params :componentname, :component_type
 
   # Index page
   index do
     selectable_column
     id_column
-    column :component_name
+    column :componentname
     column :component_type
     actions
   end
 
   # Filters
-  filter :component_name
+  filter :componentname
   filter :component_type
 
   # Edit page
   form do |f|
     f.inputs 'Cms Component Details' do
-      f.input :component_name
+      f.input :componentname
       f.input :component_type
     end
     f.actions
@@ -30,7 +30,7 @@ ActiveAdmin.register CmsComponent do
   show do
     attributes_table do
       row :id
-      row :component_name
+      row :componentname
       row :component_type
     end
   end

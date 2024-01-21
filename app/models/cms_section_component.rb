@@ -18,5 +18,4 @@ class CmsSectionComponent < ApplicationRecord
   def display_name
     "#{cms_section.sectionname} - #{cms_component.componentname}" if cms_section && cms_component
   end
-
 end

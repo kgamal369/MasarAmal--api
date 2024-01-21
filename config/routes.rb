@@ -38,15 +38,15 @@ Rails.application.routes.draw do
   resources :cms_values, path: 'cms_values' do
     collection do
       get 'language/:language', to: 'cms_values#filter_by_language', as: :cms_values_by_language
-      get 'page/:page_name', to: 'cms_values#filter_by_page', as: :cms_values_by_page
-      get ':page_name/:language', to: 'cms_values#filter_by_page_and_language', as: :custom_cms_values
-      get 'page/:page_name/section/:section_name',
+      get 'page/:pagename', to: 'cms_values#filter_by_page', as: :cms_values_by_page
+      get ':pagename/:language', to: 'cms_values#filter_by_page_and_language', as: :custom_cms_values
+      get 'page/:pagename/section/:sectionname',
           to: 'cms_values#filter_by_page_and_section', as: :cms_values_page_section
-      get 'page/:page_name/section/:section_name/language/:language',
+      get 'page/:pagename/section/:sectionname/language/:language',
           to: 'cms_values#filter_by_page_section_and_language', as: :cms_values_page_section_language
-      get 'page/:page_name/section/:section_name/component/:component_name',
+      get 'page/:pagename/section/:sectionname/component/:componentname',
           to: 'cms_values#filter_by_page_section_and_component', as: :cms_values_page_section_component
-      get 'page/:page_name/section/:section_name/component/:component_name/language/:language',
+      get 'page/:pagename/section/:sectionname/component/:componentname/language/:language',
           to: 'cms_values#filter_by_page_section_component_and_language', as: :cms_values_page_section_component_language
     end
   end

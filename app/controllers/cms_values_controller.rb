@@ -6,7 +6,7 @@ class CmsValuesController < ApplicationController
 
   def index
     @cms_values = CmsValue.includes(:cms_page_section, :cms_section_component, :cms_language)
-                          .select('cms_values.id, cms_values.value, cms_pages.page_name as cms_page_pagename, cms_sections.section_name as cms_section_sectionname, cms_components.component_name as cms_component_componentname, cms_languages.language_name as cms_language_languagename')
+                          .select('cms_values.id, cms_values.value, cms_pages.pagename as cms_page_pagename, cms_sections.sectionname as cms_section_sectionname, cms_components.componentname as cms_component_componentname, cms_languages.language_name as cms_language_languagename')
                           .joins('JOIN cms_page_sections ON cms_values.pagesectionid = cms_page_sections.id')
                           .joins('JOIN cms_pages ON cms_page_sections.pageid = cms_pages.id')
                           .joins('JOIN cms_section_components ON cms_values.sectioncomponentid = cms_section_components.id')
@@ -57,7 +57,7 @@ class CmsValuesController < ApplicationController
 
     cms_values = query.select('cms_values.value, cms_components.componentname')
                       .map do |v|
-                        { component_name: v.cms_section_component.cms_component.componentname, value: v.value }
+                        { componentname: v.cms_section_component.cms_component.componentname, value: v.value }
                       end
 
     render json: cms_values
@@ -70,17 +70,17 @@ class CmsValuesController < ApplicationController
   end
 
   def filter_by_page
-    page_name = params[:page_name]
-    filter_values_by_page(page_name)
+    pagename = params[:pagename]
+    filter_values_by_page(pagename)
   end
 
   def filter_by_page_and_language
-    page_name = params[:page_name]
+    pagename = params[:pagename]
     language = params[:language]
     cms_values = CmsValue.joins(cms_page_section: [:cms_page])
                          .joins(cms_section_component: %i[cms_section cms_component])
                          .joins(:cms_language)
-                         .where(cms_pages: { pagename: page_name }, cms_languages: { languagename: language })
+                         .where(cms_pages: { pagename: }, cms_languages: { languagename: language })
                          .select('cms_values.*', 'cms_sections.sectionname', 'cms_components.componentname')
     grouped_data = cms_values.group_by { |v| v.cms_section_component.cms_section.sectionname }
                              .transform_values do |section_values|
@@ -93,21 +93,21 @@ class CmsValuesController < ApplicationController
   end
 
   def filter_by_page_and_section
-    page_name = params[:page_name]
-    section_name = params[:section_name]
+    pagename = params[:pagename]
+    sectionname = params[:sectionname]
     @cms_values = CmsValue.joins(cms_page_section: [:cms_page, cms_section])
-                          .where(cms_pages: { pagename: page_name },
-                                 cms_sections: { section_name: })
+                          .where(cms_pages: { pagename: },
+                                 cms_sections: { sectionname: })
     render json: @cms_values
   end
 
   def filter_by_page_section_and_language
-    page_name = params[:page_name]
-    section_name = params[:section_name]
+    pagename = params[:pagename]
+    sectionname = params[:sectionname]
     language = params[:language]
     @cms_values = CmsValue.joins(:cms_language, cms_page_section: %i[cms_page cms_section])
-                          .where(cms_pages: { pagename: page_name },
-                                 cms_sections: { sectionname: section_name },
+                          .where(cms_pages: { pagename: },
+                                 cms_sections: { sectionname: },
                                  cms_languages: { languagename: language })
     render json: @cms_values
   end
@@ -141,14 +141,14 @@ class CmsValuesController < ApplicationController
 
   private
 
-  def filter_values_by_page(page_name)
-    @cms_values = CmsValue.joins(cms_page_section: :cms_page).where(cms_pages: { pagename: page_name })
+  def filter_values_by_page(pagename)
+    @cms_values = CmsValue.joins(cms_page_section: :cms_page).where(cms_pages: { pagename: })
     render json: @cms_values
   end
 
-  def filter_values_by_page_and_language(page_name, language)
+  def filter_values_by_page_and_language(pagename, language)
     @cms_values = CmsValue.joins(:cms_language, cms_page_section: :cms_page)
-                          .where(cms_pages: { pagename: page_name },
+                          .where(cms_pages: { pagename: },
                                  cms_languages: { languagename: language })
     render json: @cms_values
   end
