@@ -4,8 +4,6 @@ console.log("KGamal Test 3");
 
 function setupEventListeners() {
   console.log("setupEventListeners loaded");
-  alert("setupEventListeners loaded");
-  alert("KGamal Test 4");
 
   const pageSelect = document.getElementById('cms_page_select');
   const sectionSelect = document.getElementById('cms_section_select');
