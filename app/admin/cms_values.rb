@@ -63,9 +63,8 @@ ActiveAdmin.register CmsValue do
 
       if f.object.cms_section_component&.cms_component&.is_image_component?
         f.input :image, as: :file, input_html: { id: 'image_input', style: 'display: none;' }
-
       else
-        f.input :value, input_html: { id: 'value_input' }
+        f.input :value, as: :text, input_html: { id: 'value_input' }
       end
     end
     f.actions

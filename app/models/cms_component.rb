@@ -14,6 +14,6 @@ class CmsComponent < ApplicationRecord
   end
 
   def is_image_component?
-    %w[Image ButtonImage CoverPhoto].include?(componentname)
+    ['Image', 'ButtonImage', 'CoverPhoto'].include?(componentname)
   end
 end

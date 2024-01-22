@@ -33,32 +33,47 @@ function setupEventListeners() {
   }
   if (componentSelect) {
     componentSelect.addEventListener('change', function() {
-      updateFormFieldBasedOnComponent(this.value);
+      fetch(`/cms_values/${this.value}/is_image_component`)
+        .then(response => response.json())
+        .then(data => {
+          const imageInput = document.getElementById('image_input'); // Ensure this is the correct ID
+          const valueInput = document.getElementById('value_input'); // Ensure this is the correct ID
+  
+          if (imageInput && valueInput) {
+            if (data.is_image_component) {
+              imageInput.style.display = 'block';
+              valueInput.style.display = 'none';
+            } else {
+              imageInput.style.display = 'none';
+              valueInput.style.display = 'block';
+            }
+          }
+        })
+        .catch(error => console.error('Error:', error));
     });
   }
+  
 }
 
 
-function updateFormFieldBasedOnComponent(componentId) {
-  fetch(`/cms_values/is_image_component/${componentId}`)
-  .then(response => response.json())
-  .then(data => {
-    const imageInput = document.getElementById('image_input');
-    const valueInput = document.getElementById('value_input');
+// function updateFormFieldBasedOnComponent(componentId) {
+//   fetch(`/cms_values/is_image_component/${componentId}`)
+//   .then(response => response.json())
+//   .then(data => {
+//     const imageInput = document.getElementById('image_input');
+//     const valueInput = document.getElementById('value_input');
 
-    if (imageInput && valueInput) {
-
-      if (data.is_image_component) {
-        imageInput.closest('.input').style.display = 'block'; // Show image upload
-        valueInput.closest('.input').style.display = 'none';   // Hide text input
-      } else {
-        imageInput.closest('.input').style.display = 'none';   // Hide image upload
-        valueInput.closest('.input').style.display = 'block';  // Show text input
-      }
-    } else {
-    }
-  });
-}
+//       if (data.is_image_component) {
+//         console.log("java script is an image")
+//         imageInput.style.display = 'block';
+//         valueInput.style.display = 'none';
+//       } else {
+//         console.log("java script is an text")
+//         imageInput.style.display = 'none';
+//         valueInput.style.display = 'block';
+//       }
+//   });
+// }
 // Execute the setup function directly
 // Delay the execution of the setup function
 setTimeout(setupEventListeners, 1000); 
