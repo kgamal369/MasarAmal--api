@@ -2,7 +2,7 @@
 
 # app/admin/cms_page_sections.rb
 ActiveAdmin.register CmsPageSection do
-  permit_params :cms_page_id, :cms_section_id
+  permit_params :pageid, :sectionid
 
   index do
     selectable_column
@@ -21,9 +21,10 @@ ActiveAdmin.register CmsPageSection do
 
   form do |f|
     f.inputs 'Cms Page Section Details' do
-      f.input :cms_page_id, as: :select, collection: CmsPage.all.map { |p| [p.pagename, p.id] }
-      f.input :cms_section_id, as: :select, collection: CmsSection.all.map { |s| [s.sectionname, s.id] }
-    end
+    f.input :pageid, as: :select, collection: CmsPage.all.map { |p| [p.pagename, p.id] }
+    f.input :sectionid, as: :select, collection: CmsSection.all.map { |s| [s.sectionname, s.id] }
+                
+ end
     f.actions
   end
 

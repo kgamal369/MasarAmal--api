@@ -2,7 +2,7 @@
 
 # app/admin/cms_section_components.rb
 ActiveAdmin.register CmsSectionComponent do
-  permit_params :cms_section_id, :cms_component_id
+  permit_params :sectionid, :componentid
 
   index do
     selectable_column
@@ -22,21 +22,21 @@ ActiveAdmin.register CmsSectionComponent do
 
   form do |f|
     f.inputs 'Cms Section Component Details' do
-      f.input :cms_section_id, as: :select, collection: CmsSection.all.map { |s| [s.sectionname, s.id] }
-      f.input :cms_component_id, as: :select, collection: CmsComponent.all.map { |c| [c.componentname, c.id] }
-    end
+    f.input :sectionid, as: :select, collection: CmsSection.all.map { |s| [s.sectionname, s.id] }
+    f.input :componentid, as: :select, collection: CmsComponent.all.map { |c| [c.componentname, c.id] }
+end
     f.actions
   end
 
   show do
     attributes_table do
       row :id
-      row :sectionname do |component|
-        component.cms_section&.sectionname
+      row 'Section Name' do |section_component|
+        section_component.cms_section&.sectionname
       end
-      row :componentname do |component|
-        component.cms_component&.componentname
+      row 'Component Name' do |section_component|
+        section_component.cms_component&.componentname
       end
     end
-  end
+  end  
 end

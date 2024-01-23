@@ -66,6 +66,6 @@ class CmsPageSectionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def page_section_params
-    params.require(:page_section).permit(:SectionComponent, :CMSValue)
+    params.require(:cms_page_section).permit(:pageid, :sectionid)
   end
 end
