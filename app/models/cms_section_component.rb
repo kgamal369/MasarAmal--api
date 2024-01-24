@@ -5,7 +5,9 @@ class CmsSectionComponent < ApplicationRecord
   belongs_to :cms_section, foreign_key: 'sectionid'
   belongs_to :cms_component, foreign_key: 'componentid'
   has_many :cms_values, foreign_key: 'sectioncomponentid'
+
   validates :cms_section, :cms_component, presence: true
+  validates :cms_component_id, uniqueness: { scope: :cms_section_id, message: 'The combination of sectionId and componentId must be unique' }
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[id sectionid componentid]

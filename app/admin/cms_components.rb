@@ -21,7 +21,7 @@ ActiveAdmin.register CmsComponent do
   form do |f|
     f.inputs 'Cms Component Details' do
       f.input :componentname, label: 'Component Name'
-      f.input :componenttype , label: 'Component Type'
+      f.input :componenttype , label: 'Component Type', as: :select, collection: ['Text', 'Image']
     end
     f.actions
   end

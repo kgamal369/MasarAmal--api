@@ -7,11 +7,18 @@ class CmsValue < ApplicationRecord
                                      optional: true
   belongs_to :cms_language, class_name: 'CmsLanguage', foreign_key: 'languageid', optional: true
 
-  validates :value, presence: true
-  validates :pagesectionid,
+ # Validations for mandatory attributes
+ validates :pagesectionid, presence: { message: 'Page section ID is required' }
+ validates :sectioncomponentid, presence: { message: 'Section component ID is required' }
+ validates :languageid, presence: { message: 'Language ID is required' }
+ validates :value, presence: { message: 'Value is required' }
+
+  # Unique constraint validation
+ validates :pagesectionid,
             uniqueness: { scope: %i[sectioncomponentid languageid],
                           message: 'Combination of page, section, component, and language must be unique' }
 
+              
   has_one_attached :image
 
   validate :image_type, if: -> { image.attached? }

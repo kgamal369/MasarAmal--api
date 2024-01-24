@@ -14,6 +14,6 @@ class CmsComponent < ApplicationRecord
   end
 
   def is_image_component?
-    ['Image', 'ButtonImage', 'CoverPhoto'].include?(componentname)
+    componenttype == 'Image'
   end
 end
