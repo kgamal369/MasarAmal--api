@@ -4,6 +4,9 @@ function setupEventListeners() {
   const pageSelect = document.getElementById('cms_page_select');
   const sectionSelect = document.getElementById('cms_section_select');
   const componentSelect = document.getElementById('cms_component_select');
+  const imageInput = document.getElementById('image_input');
+  const valueInput = document.getElementById('value_input');
+ 
 
   if (pageSelect) {
     pageSelect.addEventListener('change', function() {
@@ -36,10 +39,6 @@ function setupEventListeners() {
       fetch(`/cms_values/${this.value}/is_image_component`)
         .then(response => response.json())
         .then(data => {
-          const imageInput = document.getElementById('image_input'); // Ensure this is the correct ID
-          const valueInput = document.getElementById('value_input'); // Ensure this is the correct ID
-  
-          if (imageInput && valueInput) {
             if (data.is_image_component) {
               imageInput.style.display = 'block';
               valueInput.style.display = 'none';
@@ -47,7 +46,6 @@ function setupEventListeners() {
               imageInput.style.display = 'none';
               valueInput.style.display = 'block';
             }
-          }
         })
         .catch(error => console.error('Error:', error));
     });

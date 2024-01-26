@@ -27,9 +27,10 @@ class CmsValuesController < ApplicationController
     @cms_value = CmsValue.new(cms_value_params)
     if cms_value.save
       render json: cms_value, status: :created
-      redirect_to some_path, notice: 'CMS value was successfully created.'
+      redirect_to admin_cms_value_path(cms_value), notice: 'CMS value was successfully created.'
     else
       render json: cms_value.errors, status: :unprocessable_entity
+      render'new'
     end
   end
 
