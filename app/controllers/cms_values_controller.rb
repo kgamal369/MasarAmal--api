@@ -25,14 +25,15 @@ class CmsValuesController < ApplicationController
 
   def create
     @cms_value = CmsValue.new(cms_value_params)
-    if cms_value.save
-      render json: cms_value, status: :created
-      redirect_to admin_cms_value_path(cms_value), notice: 'CMS value was successfully created.'
+    if @cms_value.save
+      redirect_to admin_cms_value_path(@cms_value), notice: 'CMS value was successfully created.'
     else
-      render json: cms_value.errors, status: :unprocessable_entity
-      render'new'
+      flash[:error] = @cms_value.errors.full_messages.join(', ')
+      redirect_to new_admin_cms_value_path notice: 'CMS value was Didnt created. Validation and Constrain not passed'
     end
   end
+  
+  
 
   def update
     cms_value = CmsValue.find(params[:id])

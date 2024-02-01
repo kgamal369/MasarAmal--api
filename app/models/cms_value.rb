@@ -48,7 +48,7 @@ class CmsValue < ApplicationRecord
 
   # Method to handle the creation or finding of the page section
   def self.create_with_page_and_section(page_id, section_id, component_id, language_id, value)
-    page_section = CmsPageSection.find_or_create_by(cms_page_id: page_id, cms_section_id: section_id)
+    page_section = CmsPageSection.find_or_create_by(pageid: page_id, sectionid: section_id)
     create(pagesectionid: page_section.id, sectioncomponentid: component_id, languageid: language_id, value:)
   end
 end

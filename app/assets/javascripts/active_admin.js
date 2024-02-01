@@ -56,9 +56,18 @@ setTimeout(setupEventListeners, 1000);
       dropdown.appendChild(option);
     });  
   }
-  window.saveCmsValue = function(cmsValueId, newValue) {
-    // Implement AJAX request to save the new value
-    console.log(`Saving new value for CMS Value ID ${cmsValueId}: ${newValue}`);
-    // Add logic to send a request to your server to update the value
-  };
+  document.addEventListener('ajax:success', function(event) {
+    // Handle a successful AJAX form submission
+    const [data, status, xhr] = event.detail;
+    alert('Record created successfully');
+    // Optionally redirect or update the page as needed
+  });
+
+  document.addEventListener('ajax:error', function(event) {
+    // Handle an error in AJAX form submission
+    const [data, status, xhr] = event.detail;
+    alert('Failed to create new record: ' + data.errors.join(', '));
+  });
+
+
 });
