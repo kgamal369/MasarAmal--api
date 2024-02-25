@@ -1,9 +1,24 @@
-<h1>New cms value</h1>
+<!-- app/views/cms_values/new.html.erb -->
+<h1>New CMS Value</h1>
 
-<%= render "form", cms_value: @cms_value %>
+<%= form_with(model: cms_value, local: true) do |form| %>
+  <% if cms_value.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cms_value.errors.count, "error") %> prohibited this cms_value from being saved:</h2>
 
-<br>
+      <ul>
+        <% cms_value.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<div>
-  <%= link_to "Back to cms values", cms_values_path %>
-</div>
+  <%# Form fields here %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', cms_values_path %>

@@ -1,11 +1,33 @@
-<p style="color: green"><%= notice %></p>
+<!-- app/views/cms_values/index.html.erb -->
+<h1>CMS Values</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Page Name</th>
+      <th>Section Name</th>
+      <th>Component Name</th>
+      <th>Language Name</th>
+      <th>Value</th>
+    </tr>
+  </thead>
 
-<h1>Cms values</h1>
-
-<div id="cms_values">
-<% @cms_values.each do |cms_value| %>
-  <%= render partial: "cms_value", locals: { cms_value: cms_value } %>
-<% end %>
-</div>
-
-<%= link_to "New cms value", new_cms_value_path %>
+  <tbody>
+    <% @cms_values.each do |cms_value| %>
+      <tr>
+        <td><%= cms_value.cms_page_pagename %></td>
+        <td><%= cms_value.cms_section_sectionname %></td>
+        <td><%= cms_value.cms_component_componentname %></td>
+        <td><%= cms_value.cms_language_languagename %></td>
+        <td>
+          <%# Display image if it's an image component and attached, otherwise display value %>
+          <%# This part needs adjustment based on actual model methods and attributes %>
+          <% if cms_value.respond_to?(:image) && cms_value.image.attached? %>
+            <%= image_tag cms_value.image, size: '50x50' %>
+          <% else %>
+            <%= cms_value.value %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

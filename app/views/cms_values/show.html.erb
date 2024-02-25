@@ -1,10 +1,28 @@
-<p style="color: green"><%= notice %></p>
+<!-- app/views/cms_values/show.html.erb -->
+<p>
+  <strong>Page Name:</strong>
+  <%= @cms_value.cms_page_pagename %>
+</p>
 
-<%= render @cms_value %>
+<p>
+  <strong>Section Name:</strong>
+  <%= @cms_value.cms_section_sectionname %>
+</p>
 
-<div>
-  <%= link_to "Edit this cms value", edit_cms_value_path(@cms_value) %> |
-  <%= link_to "Back to cms values", cms_values_path %>
+<p>
+  <strong>Component Name:</strong>
+  <%= @cms_value.cms_component_componentname %>
+</p>
 
-  <%= button_to "Destroy this cms value", @cms_value, method: :delete %>
-</div>
+<p>
+  <strong>Language Name:</strong>
+  <%= @cms_value.cms_language_languagename %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @cms_value.value %>
+</p>
+
+<%= link_to 'Edit', edit_cms_value_path(@cms_value) %> |
+<%= link_to 'Back', cms_values_path %>

@@ -1,10 +1,7 @@
-<h1>Editing cms value</h1>
+<!-- app/views/cms_values/edit.html.erb -->
+<h1>Editing CMS Value</h1>
 
-<%= render "form", cms_value: @cms_value %>
+<%= render 'form', cms_value: @cms_value %>
 
-<br>
-
-<div>
-  <%= link_to "Show this cms value", @cms_value %> |
-  <%= link_to "Back to cms values", cms_values_path %>
-</div>
+<%= link_to 'Show', @cms_value %> |
+<%= link_to 'Back', cms_values_path %>
